@@ -1,0 +1,66 @@
+Job Offer
+------------------
+Company 
+
+Job Title
+Job keywords
+Job description
+
+Location
+	City, state, country, area code etc
+
+Type of position (full/part)
+Expected Salary
+Contract length/job length
+
+----------
+Applicant
+----------
+Name
+
+Contact
+	Phone number
+	Email
+	etc.
+
+
+Educational Qualifications
+<resume upload?>
+
+
+CREATE TABLE Persons
+(
+id int NOT NULL AUTO INCREMENT,
+firstName varchar(255) NOT NULL,
+lastName varchar(255) NOT NULL,
+phoneNumber varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+)
+
+CREATE TABLE Offers
+(
+title
+keywords
+description
+City
+state
+country
+area_code
+pos_type --
+Expected Salary
+Contract length/job length
+ID int NOT NULL AUTO INCREMENT,
+firstName varchar(255) NOT NULL,
+lastName varchar(255) NOT NULL,
+phoneNumber varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+)
+
+CREATE TABLE Applications
+(
+ID int NOT NULL AUTO INCREMENT,
+firstName varchar(255) NOT NULL,
+lastName varchar(255) NOT NULL,
+phoneNumber varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+)

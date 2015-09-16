@@ -1,0 +1,186 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6A056AD9-4C97-A4DB-482C-C8BD9D1AF781" schemaObject="DB36D327-79BA-770D-48B6-44B855F38F8C" name="OFFERS">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>OFFERS</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="AC8A3E6D-52B9-9D76-CB8C-23AB644AD2D0">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LogDes-4BABEC65-108B-2A3C-F7C4-84AC47D292B0@LOGDT10040</logicalDatatype>
+<dataTypeSize>16</dataTypeSize>
+<defaultValue>sys_GUID()</defaultValue>
+<ownDataTypeParameters>16,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TITLE" id="A849DAF7-9D59-F122-C74B-4E1AE764FB65">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>TITLE</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="KEYWORDS" id="8FFC3F30-9504-EDAC-BBAC-D6BB1722B163">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>KEYWORDS</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPTION" id="7C65AF6F-5B32-8482-2D34-1F656EA729EA">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>DESCRIPTION</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000 BYTE</dataTypeSize>
+<ownDataTypeParameters>2000 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CITY" id="3027E32F-CE82-A530-0072-CDE62E81D5B3">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>CITY</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATE" id="E7228C5E-B1A2-E9A9-DF93-98B4216170CC">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>STATE</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COUNTRY" id="4DDCE168-6870-3340-3713-0B2B0D92E53F">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>COUNTRY</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AREA_CODE" id="8E361A42-0072-294E-BE94-AE44A31415A8">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>AREA_CODE</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="POS_TYPE" id="B493599C-21FF-E594-1274-AA9A3614949B">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>POS_TYPE</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALARY" id="20EC95EA-3E6B-39CB-ADC1-5542E70DFCAB">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>OFFERS</sourceObjSchema>
+<sourceObjName>SALARY</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8E5A9A20-F557-0641-E660-C798FAA91D10" name="OFFERS_PK">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>OFFERS_PK</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AC8A3E6D-52B9-9D76-CB8C-23AB644AD2D0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9B8F260F-4F34-077C-646A-AE0FD1A4D5DF" schemaObject="DB36D327-79BA-770D-48B6-44B855F38F8C" name="OFFERS_PK">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>OFFERS_PK</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AC8A3E6D-52B9-9D76-CB8C-23AB644AD2D0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

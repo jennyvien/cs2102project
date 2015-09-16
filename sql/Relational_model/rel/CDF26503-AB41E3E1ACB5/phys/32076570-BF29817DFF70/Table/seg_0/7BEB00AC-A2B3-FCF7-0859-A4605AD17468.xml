@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="PERSONS" directorySegmentName="seg_0" id="7BEB00AC-A2B3-FCF7-0859-A4605AD17468">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<schemaObject>DB36D327-79BA-770D-48B6-44B855F38F8C</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>BC95759A-096D-311F-B658-0DA4825F7827</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="LASTNAME" id="081C0D01-E1DD-1A27-1869-9C9491C5FB0B">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PHONENUMBER" id="256AD4EF-4E8B-0127-2C3E-8361EF427AEC">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PASSWORD" id="3352E15B-CAF8-DE7E-A057-64ABAA660094">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FIRSTNAME" id="A26816C3-0A26-C251-9CB2-08B32C160A37">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EMAIL" id="E4B34759-8A46-15BC-F1A5-F10C3BD3ABA4">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PERSONS_PK" id="815FCDBD-23C8-D765-1268-E6014D0E086C">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<schemaObject>DB36D327-79BA-770D-48B6-44B855F38F8C</schemaObject>
+<segment>05B2CA46-D3BA-D716-BE10-6474A01B8393</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PERSONS_PK" id="506909DA-9F2F-A6D8-0392-23A08717E8EB">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<segment>05B2CA46-D3BA-D716-BE10-6474A01B8393</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+<existingIndex>815FCDBD-23C8-D765-1268-E6014D0E086C</existingIndex>
+<indexSegment>05B2CA46-D3BA-D716-BE10-6474A01B8393</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

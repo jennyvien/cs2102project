@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="SchemaObject" objectID="DB36D327-79BA-770D-48B6-44B855F38F8C" name="ESYIR" seqName="seg_0"/>
+   <object objectType="Table" objectID="C30254B4-23D5-7888-CF26-98E564090599" name="APPLICATIONS" seqName="seg_0"/>
+   <object objectType="Table" objectID="6A056AD9-4C97-A4DB-482C-C8BD9D1AF781" name="OFFERS" seqName="seg_0"/>
+   <object objectType="Table" objectID="7BEB00AC-A2B3-FCF7-0859-A4605AD17468" name="PERSONS" seqName="seg_0"/>
+   <object objectType="FKIndexAssociation" objectID="0F550DFB-B654-CED0-E7AA-B48A55CA10B1" name="FK_OFFER_ID" seqName="seg_0" containerID="C30254B4-23D5-7888-CF26-98E564090599" refContainerID="6A056AD9-4C97-A4DB-482C-C8BD9D1AF781"/>
+   <object objectType="FKIndexAssociation" objectID="F67BB5A3-95FF-3395-223A-B0AF3466974B" name="FK_PERSON_ID" seqName="seg_0" containerID="C30254B4-23D5-7888-CF26-98E564090599" refContainerID="7BEB00AC-A2B3-FCF7-0859-A4605AD17468"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

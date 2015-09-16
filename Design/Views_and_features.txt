@@ -1,0 +1,9 @@
+#	Assumption: restful API
+#	Determine the views and information/queries needed for each view
+#	
+
+/SEARCH/
+	Display
+		Form including keywords (space separated)
+	Queries
+		LIKE keyword?

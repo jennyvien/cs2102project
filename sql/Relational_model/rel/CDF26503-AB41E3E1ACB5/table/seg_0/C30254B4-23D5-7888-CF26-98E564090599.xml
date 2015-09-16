@@ -1,0 +1,127 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C30254B4-23D5-7888-CF26-98E564090599" schemaObject="DB36D327-79BA-770D-48B6-44B855F38F8C" name="APPLICATIONS">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>APPLICATIONS</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PERSON_ID" id="578302D1-789E-8C61-AE47-E2C60E6F31C4">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>APPLICATIONS</sourceObjSchema>
+<sourceObjName>PERSON_ID</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F67BB5A3-95FF-3395-223A-B0AF3466974B" referredColumn="E4B34759-8A46-15BC-F1A5-F10C3BD3ABA4"/>
+</associations>
+</Column>
+<Column name="OFFER_ID" id="E8880C49-2EE7-2461-AE61-037DD8234523">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>APPLICATIONS</sourceObjSchema>
+<sourceObjName>OFFER_ID</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LogDes-4BABEC65-108B-2A3C-F7C4-84AC47D292B0@LOGDT10040</logicalDatatype>
+<dataTypeSize>16</dataTypeSize>
+<ownDataTypeParameters>16,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0F550DFB-B654-CED0-E7AA-B48A55CA10B1" referredColumn="AC8A3E6D-52B9-9D76-CB8C-23AB644AD2D0"/>
+</associations>
+</Column>
+<Column name="APPLICATION_DATE" id="45784C25-F89A-B331-1068-736167DA6BF3">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>APPLICATIONS</sourceObjSchema>
+<sourceObjName>APPLICATION_DATE</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="RESUME" id="CBE63E0F-96D5-0ADA-C991-E71FF6154E64">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>APPLICATIONS</sourceObjSchema>
+<sourceObjName>RESUME</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="18A08910-C345-D116-372F-3679A1DC92CE" name="APPLICATIONS_PK">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>APPLICATIONS_PK</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="578302D1-789E-8C61-AE47-E2C60E6F31C4"/>
+<colUsage columnID="E8880C49-2EE7-2461-AE61-037DD8234523"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9E8615D1-E0F2-480F-1C2E-6A1F569F164B" schemaObject="DB36D327-79BA-770D-48B6-44B855F38F8C" name="APPLICATIONS_PK">
+<sourceConnName>project_offline</sourceConnName>
+<sourceObjSchema>ESYIR</sourceObjSchema>
+<sourceObjName>APPLICATIONS_PK</sourceObjName>
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="578302D1-789E-8C61-AE47-E2C60E6F31C4"/>
+<colUsage columnID="E8880C49-2EE7-2461-AE61-037DD8234523"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DD41DF2D-A101-6072-9AB6-D2231FC13573" name="FK_OFFER_ID">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E8880C49-2EE7-2461-AE61-037DD8234523"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C1F31B14-26B2-F608-AA7C-8AA8B8D4642E" name="FK_PERSON_ID">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="578302D1-789E-8C61-AE47-E2C60E6F31C4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

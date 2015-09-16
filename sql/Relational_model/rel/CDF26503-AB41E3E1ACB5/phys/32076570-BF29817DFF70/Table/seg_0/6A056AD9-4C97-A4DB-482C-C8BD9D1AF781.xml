@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="OFFERS" directorySegmentName="seg_0" id="6A056AD9-4C97-A4DB-482C-C8BD9D1AF781">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<schemaObject>DB36D327-79BA-770D-48B6-44B855F38F8C</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>BC95759A-096D-311F-B658-0DA4825F7827</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="SALARY" id="20EC95EA-3E6B-39CB-ADC1-5542E70DFCAB">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CITY" id="3027E32F-CE82-A530-0072-CDE62E81D5B3">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="COUNTRY" id="4DDCE168-6870-3340-3713-0B2B0D92E53F">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DESCRIPTION" id="7C65AF6F-5B32-8482-2D34-1F656EA729EA">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AREA_CODE" id="8E361A42-0072-294E-BE94-AE44A31415A8">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="KEYWORDS" id="8FFC3F30-9504-EDAC-BBAC-D6BB1722B163">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TITLE" id="A849DAF7-9D59-F122-C74B-4E1AE764FB65">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="AC8A3E6D-52B9-9D76-CB8C-23AB644AD2D0">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<defaultValue>sys_GUID()</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="POS_TYPE" id="B493599C-21FF-E594-1274-AA9A3614949B">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="STATE" id="E7228C5E-B1A2-E9A9-DF93-98B4216170CC">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="OFFERS_PK" id="9B8F260F-4F34-077C-646A-AE0FD1A4D5DF">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:40 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<schemaObject>DB36D327-79BA-770D-48B6-44B855F38F8C</schemaObject>
+<segment>05B2CA46-D3BA-D716-BE10-6474A01B8393</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="OFFERS_PK" id="8E5A9A20-F557-0641-E660-C798FAA91D10">
+<createdBy>esyir</createdBy>
+<createdTime>2015-09-16 14:23:41 UTC</createdTime>
+<ownerDesignName>Relational_model</ownerDesignName>
+<segment>05B2CA46-D3BA-D716-BE10-6474A01B8393</segment>
+<tableSpace>6F5EC90A-46EB-59B1-1919-AD11F40D1FF0</tableSpace>
+<existingIndex>9B8F260F-4F34-077C-646A-AE0FD1A4D5DF</existingIndex>
+<indexSegment>05B2CA46-D3BA-D716-BE10-6474A01B8393</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>
