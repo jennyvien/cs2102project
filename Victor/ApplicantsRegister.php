@@ -37,7 +37,7 @@
 						Resume: <br>
 						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
 					<div class="row submitBtn">
-					<input type="submit" name="formSubmit" value="Submit"><a href="job_offers.php"></a></div>
+					<a href="JobOffers.php"><input type="submit" name="formSubmit" value="Submit"></a></div>
 					</form>
 
 					<?php
