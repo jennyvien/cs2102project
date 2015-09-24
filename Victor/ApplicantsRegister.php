@@ -29,7 +29,7 @@
 						)
 					  )');
 					?>
-					<form>
+					<form action="JobOffers.php">
 						Name: <input type="text" name="Name" id="Name"><br><br>
 						Email: <input type="text" name="Email" id="Email"><br><br>
 						Phone Number: <input type="text" name="Number" id="Number"><br><br>
