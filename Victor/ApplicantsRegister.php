@@ -36,10 +36,14 @@
 						Password: <input type="text" name="Password" id="Password"><br><br>
 						Resume: <br>
 						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
-					<div class="row submitBtn">
-						<input type="submit" name="formSubmit" value="Submit" onclick="location.href='JobOffers.php';"></div>
+					</form>
+					<form action="JobOffers.php">
+					    <input type="submit" name="formSubmit" value="Submit">
 					</form>
 
+					<!-- <div class="row submitBtn">
+						<button onclick=""></button><input type="submit" name="formSubmit" value="Submit" onclick="location.href='JobOffers.php';"></div>
+ -->
 					<?php
 					if(isset($_GET['formSubmit']))
 					{
