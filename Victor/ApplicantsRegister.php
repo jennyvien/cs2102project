@@ -29,6 +29,16 @@
 						)
 					  )');
 					?>
+					<form>
+						Name: <input type="text" name="Name" id="Name"><br><br>
+						Email: <input type="text" name="Email" id="Email"><br><br>
+						Phone Number: <input type="text" name="Number" id="Number"><br><br>
+						Password: <input type="text" name="Password" id="Password"><br><br>
+						Resume: <br>
+						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
+					    <input type="button" onclick="myFunction()" value="Submit form">
+					    <!-- <input type="submit" name="formSubmit" value="Submit"> -->
+					</form>
 					<?php
 					if(isset($_GET['formSubmit']))
 					{
@@ -42,19 +52,14 @@
 					<?php
 					oci_close($dbh);
 					?>
-					<form action="JobOffers.php" method="post">
-						Name: <input type="text" name="Name" id="Name"><br><br>
-						Email: <input type="text" name="Email" id="Email"><br><br>
-						Phone Number: <input type="text" name="Number" id="Number"><br><br>
-						Password: <input type="text" name="Password" id="Password"><br><br>
-						Resume: <br>
-						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
-					    <input type="submit" name="formSubmit" value="Submit">
-					</form>
-					
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function myFunction() {
+		    document.getElementById("myForm").submit();
+		    location.href="JobOffers.php"; }
+	</script>
 </body>
 </html>
