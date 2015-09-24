@@ -14,44 +14,47 @@
 	<div class="container-fluid tiffblue">
 		<div class="col-xs-offset-3 col-xs-6">
 			<div class="row">
-				<h1> Register as Applicants</h1>
+				<h1 class="title"> Register as Applicants</h1>
 			</div>
 			<div class="row">
-				<?php
-			putenv('ORACLE_HOME=/oraclient');
-			$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
-				(ADDRESS_LIST =
-				 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-				)
-				(CONNECT_DATA =
-				 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-				)
-			  )');
-			?>
-			<form>
-				Name: <input type="text" name="Name" id="Name"><br><br>
-				Email:<input type="text" name="Email" id="Email"><br><br>
-				Phone Number:<input type="text" name="Number" id="Number"><br><br>
-				Password:<input type="text" name="Password" id="Password"><br><br>
-				Resume:<br>
-				<textarea rows="4" cols="50" name="Resume" id="Resume">
-			Enter Resume here...</textarea><br>
-			<input type="submit" name="formSubmit" value="Submit">
-			</form>
+				<div class="col-xs-offset-2 col-xs-8">
+					<?php
+					putenv('ORACLE_HOME=/oraclient');
+					$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
+						(ADDRESS_LIST =
+						 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+						)
+						(CONNECT_DATA =
+						 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+						)
+					  )');
+					?>
+					<form>
+						Name: <input type="text" name="Name" id="Name"><br><br>
+						Email: <input type="text" name="Email" id="Email"><br><br>
+						Phone Number: <input type="text" name="Number" id="Number"><br><br>
+						Password: <input type="text" name="Password" id="Password"><br><br>
+						Resume: <br>
+						<textarea rows="4" cols="50" name="Resume" id="Resume">
+					Enter Resume here...</textarea><br>
+					<div class="row submitBtn">
+					<input type="submit" name="formSubmit" value="Submit"><a href="job_offers.php"></a></div>
+					</form>
 
-			<?php
-			if(isset($_GET['formSubmit']))
-			{
-				$sql = "insert into Applicants values ('".$_GET['Name']."','".$_GET['Email']."','".$_GET['Number']."','".$_GET['Password']."','".$_GET['Resume']."')";
-				$stid = oci_parse($dbh, $sql);
-				oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
-				oci_free_statement($stid);
-			}
-			?>
+					<?php
+					if(isset($_GET['formSubmit']))
+					{
+						$sql = "insert into Applicants values ('".$_GET['Name']."','".$_GET['Email']."','".$_GET['Number']."','".$_GET['Password']."','".$_GET['Resume']."')";
+						$stid = oci_parse($dbh, $sql);
+						oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
+						oci_free_statement($stid);
+					}
+					?>
 
-			<?php
-			oci_close($dbh);
-			?>
+					<?php
+					oci_close($dbh);
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
