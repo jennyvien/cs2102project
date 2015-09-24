@@ -1,7 +1,16 @@
 <html>
-<head> <title> Register Applicants </title> </head>
+<head> <title> Register Applicants </title> 
 
-<body bgcolor="#9F81F7">
+<link rel="stylesheet" href="css/styles.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body class="tiffblue">
 <table>
 <tr> <td column = '100'>
 <h1> Register as Applicants</h1>
