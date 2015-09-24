@@ -36,7 +36,7 @@
 						Password: <input type="text" name="Password" id="Password"><br><br>
 						Resume: <br>
 						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
-					    <input type="submit" name="formSubmit" value="Submit">
+					    <input type="submit" name="formSubmit" class="button_active" value="1">
 					</form>
 
 					<!-- <div class="row submitBtn">
