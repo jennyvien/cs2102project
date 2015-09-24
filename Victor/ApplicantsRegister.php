@@ -35,8 +35,7 @@
 						Phone Number: <input type="text" name="Number" id="Number"><br><br>
 						Password: <input type="text" name="Password" id="Password"><br><br>
 						Resume: <br>
-						<textarea rows="4" cols="50" name="Resume" id="Resume">
-					Enter Resume here...</textarea><br>
+						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
 					<div class="row submitBtn">
 					<input type="submit" name="formSubmit" value="Submit"><a href="job_offers.php"></a></div>
 					</form>
