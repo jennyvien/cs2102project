@@ -29,26 +29,24 @@
 						)
 					  )');
 					?>
-					<form>
+					<form action="JobOffers.php" method="POST">
 						Name: <input type="text" name="Name" id="Name"><br><br>
 						Email: <input type="text" name="Email" id="Email"><br><br>
 						Phone Number: <input type="text" name="Number" id="Number"><br><br>
 						Password: <input type="text" name="Password" id="Password"><br><br>
 						Resume: <br>
 						<textarea rows="4" cols="50" name="Resume" id="Resume">Enter Resume here...</textarea><br>
-					    <input type="button" onclick="myFunction()" value="Submit form">
-					    <!-- <input type="submit" name="formSubmit" value="Submit"> -->
+					    <input type="submit" name="Submission" value="Submit">
 					</form>
 					<?php
-					if(isset($_GET['formSubmit']))
+					if(isset($_POST['Submission']))
 					{
-						$sql = "insert into Applicants values ('".$_GET['Name']."','".$_GET['Email']."','".$_GET['Number']."','".$_GET['Password']."','".$_GET['Resume']."')";
+						$sql = "insert into Applicants values ('".$_POST['Name']."','".$_POST['Email']."','".$_POST['Number']."','".$_POST['Password']."','".$_POST['Resume']."')";
 						$stid = oci_parse($dbh, $sql);
 						oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 						oci_free_statement($stid);
 					}
 					?>
-
 					<?php
 					oci_close($dbh);
 					?>
@@ -56,10 +54,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		function myFunction() {
-		    document.getElementById("myForm").submit();
-		    location.href="JobOffers.php"; }
-	</script>
 </body>
 </html>
