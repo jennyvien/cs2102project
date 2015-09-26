@@ -29,7 +29,7 @@
 						)
 					  )');
 					?>
-					<form action="JobOffers.php" method="POST">
+					<form method="POST">
 						Name: <input type="text" name="Name" id="Name"><br><br>
 						Email: <input type="text" name="Email" id="Email"><br><br>
 						Phone Number: <input type="text" name="Number" id="Number"><br><br>
@@ -45,6 +45,7 @@
 						$stid = oci_parse($dbh, $sql);
 						oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 						oci_free_statement($stid);
+						echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 					}
 					?>
 					<?php
