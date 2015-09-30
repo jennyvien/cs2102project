@@ -18,7 +18,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	)
   )');
 ?>
-<form>
+<form method="POST">
 	Email:<input type="text" name="Email" id="Email"><br><br/>
 	Company:<input type="text" name="Company" id="Company"><br><br/>
 	First Name:<input type="text" name="FirstName" id="FirstName"><br><br/>
@@ -29,12 +29,13 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 </form>
 
 <?php
-if(isset($_GET['formSubmit']))
+if(isset($_POST['formSubmit']))
 {
-	$sql = "insert into Employers values ('".$_GET['Email']."','".$_GET['Company']."','".$_GET['FirstName']."','".$_GET['LastName']."','".$_GET['Number']."','".$_GET['Password']."')";
+	$sql = "insert into Employers values ('".$_POST['Email']."','".$_POST['Company']."','".$_POST['FirstName']."','".$_POST['LastName']."','".$_POST['Number']."','".$_POST['Password']."')";
 	$stid = oci_parse($dbh, $sql);
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
+	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 }
 ?>
 

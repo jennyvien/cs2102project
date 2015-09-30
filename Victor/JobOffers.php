@@ -24,7 +24,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	while($row = oci_fetch_array($stid)) {
 		echo "<tr>";
 		echo "<td>";
-		echo "<a href=job_offer_description.php>" .$row[0] . "</a>";
+		echo "<a href=JobOfferDescription.php>" .$row[0] . "</a>";
 		echo "</td>";
 		echo "</tr>";
 	}

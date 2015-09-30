@@ -20,7 +20,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
   )');
 ?>
 
-<form>
+<form method="POST">
 	Email: <input type="text" name="Email" id="Email"> <br><br>
 	Password: <input type="text" name ="Password" id = "Password"><br><br>
 	Job Number: <input type="number" name="JobNum" id="JobNum"><br><br>
@@ -38,19 +38,19 @@ Enter Resume here...</textarea><br>
 </form>
 
 <?php
-if(isset($_GET['formSubmit']))
+if(isset($_POST['formSubmit']))
 {	
-	$int = (is_numeric($_GET['Areacode']) ? (int)$_GET['Areacode'] : 0);
-	$int2 = (is_numeric($_GET['Salary']) ? (int)$_GET['Salary'] : 0);
-	$sql1 = "select count(*) from employers where email='".$_GET['Email']."' and password='".$_GET['Password']."'";
+	$int = (is_numeric($_POST['Areacode']) ? (int)$_POST['Areacode'] : 0);
+	$int2 = (is_numeric($_POST['Salary']) ? (int)$_POST['Salary'] : 0);
+	$sql1 = "select count(*) from employers where email='".$_POST['Email']."' and password='".$_POST['Password']."'";
 	$stid1 = oci_parse($dbh, $sql1);
 	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
 	$row = oci_fetch_array($stid1);
 	if ($row[0]>0)
 	{
-		$sql = "insert into jobOffers values ('".$_GET['JobNum']."','".$_GET['Email']."',
-			'".$_GET['Title']."','".$_GET['Keywords']."','".$_GET['Description']."','".$_GET['City']."','".$_GET['Country']."','".$int.
-			"','".$_GET['Postype']."','".$int2.
+		$sql = "insert into jobOffers values ('".$_POST['JobNum']."','".$_POST['Email']."',
+			'".$_POST['Title']."','".$_POST['Keywords']."','".$_POST['Description']."','".$_POST['City']."','".$_POST['Country']."','".$int.
+			"','".$_POST['Postype']."','".$int2.
 			"')";
 	
 		$stid = oci_parse($dbh, $sql);
@@ -61,6 +61,7 @@ if(isset($_GET['formSubmit']))
 		echo "Cannot find User";
 	}
 	oci_free_statement($stid1);
+	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";
 }
 ?>
 

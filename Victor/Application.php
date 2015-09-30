@@ -20,7 +20,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
   )');
 ?>
 
-<form>
+<form method="POST">
 	Email: <input type="text" name="Email" id="Email"> <br><br>
 	Password: <input type="text" name ="Password" id = "Password"><br><br>
 
@@ -28,30 +28,30 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	Job Number <input type="text" name="Num" id="Num"><br><br>
 	Write Up:<br>	
 	<textarea rows="4" cols="50" name="WriteUp" id="WriteUp">
-Write up..</textarea><br>
-<input type="submit" name="formSubmit" value="Submit">
+	Write up..</textarea><br>
+	<input type="submit" name="formSubmit" value="Submit">
 </form>
 
 
 <?php
-if(isset($_GET['formSubmit']))
+if(isset($_POST['formSubmit']))
 {
-	$int = (is_numeric($_GET['Num']) ? (int)$_GET['Num'] : 0);
+	$int = (is_numeric($_POST['Num']) ? (int)$_POST['Num'] : 0);
 	date_default_timezone_set('UTC');
 
 
-	$sql1 = "select count(*) from applicants where email='".$_GET['Email']."' and password='".$_GET['Password']."'";
+	$sql1 = "select count(*) from applicants where email='".$_POST['Email']."' and password='".$_POST['Password']."'";
 	$stid1 = oci_parse($dbh, $sql1);
 	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
 	$row = oci_fetch_array($stid1);
 
-	$sql2 = "Select count(*) from joboffers where employers='".$_GET['Employer']."' and jobnum=".$int;
+	$sql2 = "Select count(*) from joboffers where employers='".$_POST['Employer']."' and jobnum=".$int;
 	$stid2 = oci_parse($dbh, $sql2);
 	oci_execute($stid2,OCI_COMMIT_ON_SUCCESS);
 	$row2 = oci_fetch_array($stid2);
 
 	if ($row>0 and $row2>0){
-		$sql = "Insert into Applications values('".$_GET['Email']."',sysdate,'".$_GET['WriteUp']."','".$_GET['Employer']."',".$int.")";
+		$sql = "Insert into Applications values('".$_POST['Email']."',sysdate,'".$_POST['WriteUp']."','".$_POST['Employer']."',".$int.")";
 		$stid= oci_parse($dbh, $sql);
 		oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 		oci_free_statement($stid);
@@ -60,7 +60,7 @@ if(isset($_GET['formSubmit']))
 	}
 	oci_free_statement($stid1);
 	oci_free_statement($stid2);
-
+	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 }
 ?>
 <?php
