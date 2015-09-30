@@ -1,4 +1,5 @@
 <html>
+<<<<<<< Updated upstream
 <head> <title>Job Offer Description</title> 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -14,6 +15,14 @@
 <?php
 putenv('ORACLE_HOME=/oraclient');
 $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
+=======
+<head> <title>Job Description</title> </head>
+<h1> Job Description</h1>
+<body>
+<?php
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
+>>>>>>> Stashed changes
 	(ADDRESS_LIST =
 	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 	)
@@ -23,6 +32,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
   )');
 ?>
 <?php
+<<<<<<< Updated upstream
 {
 	$sql="SELECT * FROM joboffers order by jobnum";
 	$stid=oci_parse($dbh, $sql);
@@ -46,6 +56,28 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 
 <?php
 oci_close($dbh);
+=======
+	$job_title=$_GET['job_title'];
+	echo "Title: " . $job_title;
+	
+	$sql="SELECT e.company FROM employers e WHERE e.email='" . $_GET['employer'] . "'";
+	$stid=oci_parse($dbh, $sql);
+	oci_execute($stid, OCI_DEFAULT);
+	$row = oci_fetch_array($stid);
+	$employer=$row[0];
+	echo "<br> Company: " . $employer . "";
+	
+	$description=$_GET['description']; 
+	echo "<br> Job Description: " . $description . "";
+	$city=$_GET['city'];
+	$country=$_GET['country'];
+	echo "<br> Location: " . $city . ", " . $country;
+	$pos_type=$_GET['pos_type'];
+	echo "<br> Position type: " . $pos_type . "";
+	$salary=$_GET['salary'];
+	echo "<br> Salary: $" . $salary . "/year";
+		
+>>>>>>> Stashed changes
 ?>
 </body>
 </html>
