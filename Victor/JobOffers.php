@@ -27,13 +27,8 @@ $dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
   )');
 ?>
 <?php
-<<<<<<< Updated upstream
 {	
 	$sql="SELECT * FROM joboffers j ORDER BY j.jobnum";
-=======
-{
-	$sql="SELECT j.title, j.employers, j.description, j.city, j.country, j.pos_type, j.salary FROM joboffers j ORDER BY j.jobnum";
->>>>>>> Stashed changes
 	$stid=oci_parse($dbh, $sql);
 	oci_execute($stid, OCI_DEFAULT);
 	while($row = oci_fetch_array($stid)) {
@@ -48,28 +43,7 @@ $dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
 		// For the individual URl
 		echo "<tr>";
 		echo "<td>";
-<<<<<<< Updated upstream
 		echo "<a href=JobOfferDescription.php onclick=\"StoreJobNum()\">" .$row[2] . "</a>";
-=======
-		echo "<a href=job_offer_description.php?";
-			echo "job_title=";
-			echo $job_title;
-			echo "&employer=";
-			echo $employer;
-			echo "&description=";
-			echo $job_description;
-			echo "&city=";
-			echo $city;
-			echo "&country=";
-			echo $country;
-			echo "&pos_type=";
-			echo $pos_type;	
-			echo "&salary=";
-			echo $salary;			
-			echo ">"; 
-			echo $row[0];
-			echo "</a>";
->>>>>>> Stashed changes
 		echo "</td>";
 		echo "</tr>";		
 	}
