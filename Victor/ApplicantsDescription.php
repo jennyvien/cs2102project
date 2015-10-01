@@ -1,5 +1,5 @@
 <html>
-<head> <title>Job Offer Description</title> 
+<head> <title>Applicant's Application</title> 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -9,8 +9,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
-<body bgcolor="#D8D8D8">
-<h1> Job Description</h1>
+
+<body>
+	<h1> Applicant's Application</h1>
+<table>
+<tr> <td column = '100'>
+
+</td> </tr>
 <?php
 putenv('ORACLE_HOME=/oraclient');
 $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
@@ -22,27 +27,23 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	)
   )');
 ?>
+
 <?php
-	$job_title=$_GET['job_title'];
-	echo "Title: " . $job_title;
-	
-	$sql="SELECT e.company FROM employers e WHERE e.email='" . $_GET['employer'] . "'";
+	$applicants=$_GET['applicants'];
+
+	$sql="SELECT a.name, a.phonenumber, a.resume FROM applicants a WHERE a.email='" . $_GET['applicants'] . "'";
 	$stid=oci_parse($dbh, $sql);
 	oci_execute($stid, OCI_DEFAULT);
 	$row = oci_fetch_array($stid);
-	$employer=$row[0];
-	echo "<br> Company: " . $employer . "";
-	
-	$description=$_GET['description']; 
-	echo "<br> Job Description: " . $description . "";
-	$city=$_GET['city'];
-	$country=$_GET['country'];
-	echo "<br> Location: " . $city . ", " . $country;
-	$pos_type=$_GET['pos_type'];
-	echo "<br> Position type: " . $pos_type . "";
-	$salary=$_GET['salary'];
-	echo "<br> Salary: $" . $salary . "/year";
+	echo "Job ID: ".$_GET[jobid]."";
+	echo "<br> Name: " . $row[0]."";
+	echo "<br> Email: ".$_GET['applicants']."";
+	echo "<br> Phone Number: ".$row[1]."";
+	echo "<br> Date Applied: ".$_GET['date']."";
+	echo "<br> Write Up: ".$_GET['writeup']."";
+	echo "<br> Resume: ".$row[2]."";
 		
 ?>
+</table>
 </body>
 </html>
