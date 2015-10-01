@@ -44,7 +44,7 @@ if(isset($_GET['jobSubmit']))
     oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
     oci_free_statement($stid1);
     $result = oci_num_rows($sql1);
-    if($result<0){
+    if($result<1){
         echo "Incorrect Email or Password";
     }
 
