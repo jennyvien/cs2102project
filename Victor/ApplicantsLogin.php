@@ -1,9 +1,6 @@
 <?php
 	session_start();
-	if ($_SESSION["LoggedIn"] == 1){
-		header("Location: ApplicantsLoginResult.php");
-		}
-	elseif($_SESSION["Failed"] == 1){
+	if($_SESSION["Failed"] == 1){
 		$fail_flag = 1;
 		$_SESSION["Failed"] = 0;
 	}
@@ -54,7 +51,7 @@
 					<form method="POST">
 						Email: <input type="text" name="Email" id="Email"><br><br>
 						Password: <input type="text" name="Password" id="Password"><br><br>
-						<input type="submit" value = "Submit">
+						<input type="submit" value = "Submit", name="Submit">
 					</form>
 
 					<!--TESTING-->
@@ -63,10 +60,15 @@
 						echo '<pre>';
 						var_dump($_SESSION);
 						echo '</pre>';
+						echo "POST: <br>";
+						echo '<pre>';
+						var_dump($_POST);
+						echo '</pre>';
 						//Currently might be vulnerable to SQL injection
 						$sql = "SELECT * FROM Applicants";
 						$stid = oci_parse($dbh, $sql);
 						oci_execute($stid);
+						echo oci_num_rows($stid);
 						if (oci_execute($stid)){ 
 				        usleep(100); 
 				        echo "<TABLE border \"1\">"; 
@@ -84,22 +86,41 @@
 				        } 
 				        echo "</TABLE>"; 
 				    }
+				    $email = "asd";
+				    $password = "ddasd";
+				    $sql = "SELECT * FROM  Applicants
+								WHERE email = :email and
+								password = :password";
+						$stid = oci_parse($dbh, $sql);
+						oci_bind_by_name($stid, ":email", $email);
+						oci_bind_by_name($stid, ":password", $password);
+						oci_execute($stid);
+						$data = oci_fetch_array($stid);
+						var_dump($data);
+						echo count($data);
 					?>
 
 					<?php
-					if(isset($_POST['Submission']))
+					if(isset($_POST['Submit']))
 					{
 						//Currently might be vulnerable to SQL injection
-						$sql = $pdo->prepare('SELECT * FROM  Applicants
-											  WHERE email = :email');
+						$sql = 'SELECT * FROM  Applicants
+								WHERE email = :email and
+								password = :password' ;
 						$stid = oci_parse($dbh, $sql);
 						oci_bind_by_name($stid, ":email", $_POST["Email"]);
+						oci_bind_by_name($stid, ":password", $_POST["Password"]);
 						oci_execute($stid);
-						$_SESSION["TestData1"]  = "TEST:".oci_num_rows($stid);
-						if (oci_num_rows($stid) >0)
+						$data = oci_fetch_array($stid);
+						if (count($data) >1)
 						{
 							$_SESSION["LoggedIn"] = 1;
-							$_SESSION["Username"] = $_POST["Email"];
+							$_SESSION["Username"] = $_data["NAME"];
+							$_SESSION["Email"] = $_data["EMAIL"];
+							echo '<META HTTP-EQUIV="Refresh" Content="0; URL=ApplicantsLoginResult.php">';
+						}
+						else{
+							$_SESSION["Failed"] = 1;
 						}
 						oci_free_statement($stid);
 						oci_close($dbh);
