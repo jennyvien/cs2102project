@@ -45,7 +45,7 @@ $dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
 		// For the individual URl
 		echo "<tr>";
 		echo "<td>";
-		echo "<a href=job_offer_description.php?";
+		echo "<a href=JobOfferDescription.php?";
 		echo "job_title=";
 		echo $job_title;
 		echo "&employer=";
