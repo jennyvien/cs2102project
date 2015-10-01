@@ -17,7 +17,7 @@
 </td> </tr>
 <?php
 putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
+$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	(ADDRESS_LIST =
 	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 	)
