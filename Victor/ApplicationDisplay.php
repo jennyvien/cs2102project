@@ -1,5 +1,5 @@
 <html>
-<head> <title>Job Offer Listings</title> 
+<head> <title>Application Listings</title> 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -39,7 +39,7 @@ if(isset($_POST['formSubmit']))
 	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
 	$row1 = oci_fetch_array($stid1);
 	if ($row1[0]>0){
-		$sql="SELECT a.applicants,a.joboffers,a.date_applied,a.writeup FROM applications a where employers ='".$_POST['Cemail']."' ORDER BY a.date_applied";
+		$sql="SELECT a.applicants,a.joboffers,a.date_applied,a.writeup,a.joboffers FROM applications a where employers ='".$_POST['Cemail']."' ORDER BY a.date_applied";
 		$stid=oci_parse($dbh, $sql);	
 		oci_execute($stid, OCI_DEFAULT);
 		while($row = oci_fetch_array($stid)) {
@@ -47,17 +47,22 @@ if(isset($_POST['formSubmit']))
 			$jobid=str_replace(' ', '%20', $row[1]);
 			$date=str_replace(' ', '%20', $row[2]);
 			$writeup=str_replace(' ', '%20', $row[3]);
+			$jobid=str_replace(' ', '%20', $row[4]);
 			echo "<tr>";
 			echo "<td>";
-			echo "<a href=Applicants.php?";
+			echo "<a href=ApplicantsDescription.php?";
 			echo "applicants=";
 			echo $applicants;
+			echo "&Cemail=";
+			echo $_post['Cemail'];
 			echo "&jobid=";
 			echo $jobid;
 			echo "&date=";
 			echo $date;
 			echo "&writeup=";
-			echo $writeup;			
+			echo $writeup;		
+			echo "&jobid=";
+			echo $jobid;	
 			echo ">"; 
 			echo $row[0];
 			echo "</a>";
