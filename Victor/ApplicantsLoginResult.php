@@ -1,6 +1,6 @@
 <?php session_start()?>
 <html>
-<head> <title> Register Applicants </title> 
+<head> <title> Welcome </title> 
 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -21,7 +21,7 @@
 				<div class="col-xs-offset-2 col-xs-8">
 					<?php
 						
-							echo "Welcome".$_SESSION["Username"].", you are now logged in."
+							echo "Welcome ".$_SESSION["Username"].", you are now logged in."
 					?>
 				</div>
 			</div>

@@ -87,7 +87,7 @@
 				        echo "</TABLE>"; 
 				    }
 				    $email = "asd";
-				    $password = "ddasd";
+				    $password = "ddd";
 				    $sql = "SELECT * FROM  Applicants
 								WHERE email = :email and
 								password = :password";
@@ -115,8 +115,8 @@
 						if (count($data) >1)
 						{
 							$_SESSION["LoggedIn"] = 1;
-							$_SESSION["Username"] = $_data["NAME"];
-							$_SESSION["Email"] = $_data["EMAIL"];
+							$_SESSION["Username"] = $data["NAME"];
+							$_SESSION["Email"] = $data["EMAIL"];
 							echo '<META HTTP-EQUIV="Refresh" Content="0; URL=ApplicantsLoginResult.php">';
 						}
 						else{
