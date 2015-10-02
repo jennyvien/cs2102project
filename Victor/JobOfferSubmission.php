@@ -32,7 +32,6 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 <form method="POST">
 	Email: <input type="text" name="Email" id="Email"> <br><br>
 	Password: <input type="text" name ="Password" id = "Password"><br><br>
-	Job Number: <input type="number" name="JobNum" id="JobNum"><br><br>
 	Title: <input type="text" name="Title" id="Title"><br><br>
 	Keywords: <input type="text" name ="Keywords" id="Keywords"><br><br>
 	Country:<input type="text" name ="Country" id="Country"><br><br>
@@ -57,7 +56,7 @@ if(isset($_POST['formSubmit']))
 	$row = oci_fetch_array($stid1);
 	if ($row[0]>0)
 	{
-		$sql = "insert into jobOffers values ('".$_POST['JobNum']."','".$_POST['Email']."',
+		$sql = "insert into jobOffers(employers,title,keywords,Description,city,country,area_code,Pos_type,salary) values ('".$_POST['Email']."',
 			'".$_POST['Title']."','".$_POST['Keywords']."','".$_POST['Description']."','".$_POST['City']."','".$_POST['Country']."','".$int.
 			"','".$_POST['Postype']."','".$int2.
 			"')";
