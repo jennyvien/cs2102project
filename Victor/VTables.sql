@@ -9,7 +9,7 @@ password varchar(255) NOT NULL --HASH THE PASSWORDS. FRAMEWORKS SHOULD HANDLE TH
 );
 
 create table JobOffers(
-jobnum int NOT NULL,
+jobnum raw(16) default sys_guid(),
 Employers varchar(255),
 title varchar(255) NOT NULL,
 keywords varchar(255) NOT NULL, --CSV
@@ -37,7 +37,7 @@ date_applied date not null,
 writeup varchar(256) not null,
 
 Employers varchar(255) not null,
-JobOffers int not null,
+JobOffers raw(16) not null,
 
 primary key(applicants,Employers,JobOffers),
 foreign key (applicants) references Applicants(email),
