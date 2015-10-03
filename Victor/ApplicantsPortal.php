@@ -1,6 +1,6 @@
 <?php session_start()?>
 <html>
-<head> <title> Welcome </title> 
+<head> <title> Placeholder portal </title> 
 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -15,15 +15,16 @@
 	<div class="container-fluid tiffblue">
 		<div class="col-xs-offset-3 col-xs-6">
 			<div class="row">
-				<h1 class="title"> Register as Applicants</h1>
+				<h1 class="title"> Applicant Portal</h1>
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
 					<?php
-							echo "Welcome ".$_SESSION["Username"].", you are now logged in.";
-							
+							echo "Welcome, applicant ".$_SESSION["Username"].".<br>";
 					?>
-					<meta http-equiv="refresh" content="2; url=ApplicantsPortal.php" />
+					 <a href="Application.php">Apply for a job</a> <br>
+					 <a href="ApplicationDisplay.php" >View job application status</a> <br>
+					 <a href="#" >Browse Jobs</a> <br>
 				</div>
 			</div>
 		</div>

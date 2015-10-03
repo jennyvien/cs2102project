@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+	header("Location: ApplicantsLogin.php");
+	$test = "NOT LOGGED IN";
+}
+
+?>
 <html>
 <head> <title>Application Listings</title> 
 <link rel="stylesheet" href="CSS/styles.css">
@@ -31,6 +39,13 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	Password: <input type ="text" name ="Password" id="Password">
 	<input type="submit" name="formSubmit" value="Search" > 
 </form>
+<?php
+//Debugging, shows what variables are available in the session
+echo '<pre>';
+						var_dump($_SESSION);
+						echo '</pre>';
+						echo $test;
+						?>
 <?php
 if(isset($_POST['formSubmit']))
 {	
