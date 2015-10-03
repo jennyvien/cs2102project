@@ -29,11 +29,9 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 ?>
 
 <form method="POST">
+
 	Email: <input type="text" name="Email" id="Email"> <br><br>
 	Password: <input type="text" name ="Password" id = "Password"><br><br>
-
-	Employer's Email:<input type="text" name ="Employer" id="Employer"><br><br>
-	Job Number <input type="text" name="Num" id="Num"><br><br>
 	Write Up:<br>	
 	<textarea rows="4" cols="50" name="WriteUp" id="WriteUp">
 	Write up..</textarea><br>
@@ -44,7 +42,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 <?php
 if(isset($_POST['formSubmit']))
 {
-	$int = (is_numeric($_POST['Num']) ? (int)$_POST['Num'] : 0);
+	$jobnum = $_GET['jobnum'];
 	date_default_timezone_set('UTC');
 
 
@@ -52,22 +50,20 @@ if(isset($_POST['formSubmit']))
 	$stid1 = oci_parse($dbh, $sql1);
 	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
 	$row = oci_fetch_array($stid1);
+	echo "still okay";
 
-	$sql2 = "Select count(*) from joboffers where employers='".$_POST['Employer']."' and jobnum=".$int;
-	$stid2 = oci_parse($dbh, $sql2);
-	oci_execute($stid2,OCI_COMMIT_ON_SUCCESS);
-	$row2 = oci_fetch_array($stid2);
 
-	if ($row>0 and $row2>0){
-		$sql = "Insert into Applications values('".$_POST['Email']."',sysdate,'".$_POST['WriteUp']."','".$_POST['Employer']."',".$int.")";
+	if ($row>0){
+
+		$sql = "Insert into Applications values('".$_POST['Email']."',sysdate,'".$_POST['WriteUp']."','".$_GET['employer']."', '".$_GET['jobnum']."')";
 		$stid= oci_parse($dbh, $sql);
 		oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 		oci_free_statement($stid);
 	}else{
-		echo "Cannot find user or Job";
+		echo "Cannot find user";
 	}
 	oci_free_statement($stid1);
-	oci_free_statement($stid2);
+
 	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 }
 ?>

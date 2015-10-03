@@ -29,7 +29,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 <?php
 {	
 	
-	$sql="SELECT j.title, j.employers, j.description, j.city, j.country, j.pos_type, j.salary FROM joboffers j ORDER BY j.jobnum";
+	$sql="SELECT j.title, j.employers, j.description, j.city, j.country, j.pos_type, j.salary,j.jobnum FROM joboffers j ORDER BY j.jobnum";
 
 	$stid=oci_parse($dbh, $sql);	
 	oci_execute($stid, OCI_DEFAULT);
@@ -40,7 +40,8 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 		$city=str_replace(' ', '%20', $row[3]);
 		$country=str_replace(' ', '%20', $row[4]);
 		$pos_type=str_replace(' ', '%20', $row[5]);
-		$salary=$row[5];
+		$salary=$row[6];
+		$jobnum=str_replace(' ', '%20', $row[7]);
 		
 		// For the individual URl
 		echo "<tr>";
@@ -50,6 +51,8 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 		echo $job_title;
 		echo "&employer=";
 		echo $employer;
+		echo "&jobnum=";
+		echo bin2hex($row[7]);
 		echo "&description=";
 		echo $job_description;
 		echo "&city=";
