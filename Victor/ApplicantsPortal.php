@@ -24,7 +24,7 @@
 					?>
 					 <a href="Application.php">Apply for a job</a> <br>
 					 <a href="ApplicationDisplay.php" >View job application status</a> <br>
-					 <a href="#" >Browse Jobs</a> <br>
+					 <a href="ApplicantsBrowseJobs.php" >Browse Jobs</a> <br>
 				</div>
 			</div>
 		</div>
