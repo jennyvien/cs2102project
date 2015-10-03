@@ -1,13 +1,12 @@
 <?php
-	session_start();
-	if($_SESSION["Failed"] == 1){
-		$fail_flag = 1;
-		$_SESSION["Failed"] = 0;
-	}
-	else{
-	}
-
- ?>
+// Standard login required preamble
+// To use, place as the FIRST LINE of the page
+session_start();
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+	header("Location: ApplicantsLogin.php");
+}
+?>
+<!-- Browse all available jobs (applicant-side) -->
 <html>
 <head> <title> All Jobs </title> 
 

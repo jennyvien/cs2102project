@@ -1,11 +1,14 @@
 <?php
+// Standard login required
+// To use, place as the FIRST LINE of the page
 session_start();
 if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	header("Location: ApplicantsLogin.php");
-	$test = "NOT LOGGED IN";
 }
-
 ?>
+
+<!-- Show the status of all job applications -->
+
 <html>
 <head> <title>Application Listings</title> 
 <link rel="stylesheet" href="CSS/styles.css">

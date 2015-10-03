@@ -1,4 +1,14 @@
-<?php session_start()?>
+<?php
+// Standard login required preamble
+// To use, place as the FIRST LINE of the page
+session_start();
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+	header("Location: ApplicantsLogin.php");
+}
+?>
+
+<!-- Display result of Applicant login -->
+
 <html>
 <head> <title> Welcome </title> 
 

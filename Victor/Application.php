@@ -1,3 +1,4 @@
+<!-- INSERT DESCRIPTION OF WHAT THIS PAGE IS FOR -->
 <html>
 <head> <title> Job Application </title> 
 <link rel="stylesheet" href="CSS/styles.css">

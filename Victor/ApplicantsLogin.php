@@ -6,8 +6,8 @@
 	}
 	else{
 	}
-
  ?>
+ <!-- Login page for Applicants -->
 <html>
 <head> <title> Applicant Login </title> 
 
