@@ -42,7 +42,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	echo "<br> Position type: " . $pos_type . "";
 	$salary=$_GET['salary'];
 	echo "<br> Salary: $" . $salary . "/year";
-	echo "<br><br><a href=Application.php>Apply here</a>";	
+	echo "<br><br><a href=Application.php?jobnum=".$_GET['jobnum']."&employer=".$_GET['employer'].">Apply here</a>";	
 ?>
 
 </body>
