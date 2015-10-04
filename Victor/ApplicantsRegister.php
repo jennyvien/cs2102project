@@ -1,4 +1,5 @@
 <!-- Register a new applicant -->
+
 <html>
 <head> <title> Register Applicants </title> 
 

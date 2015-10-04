@@ -1,4 +1,4 @@
-<!-- INSERT DESCRIPTION OF WHAT THIS PAGE IS FOR -->
+<!-- Apply for a specific job (from browse screen) -->
 <html>
 <head> <title> Job Application </title> 
 <link rel="stylesheet" href="CSS/styles.css">
@@ -39,6 +39,30 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	<input type="submit" name="formSubmit" value="Submit">
 </form>
 
+<?php
+
+//Currently might be vulnerable to SQL injection
+	$sql = "SELECT * FROM Applicants";
+	$stid = oci_parse($dbh, $sql);
+	oci_execute($stid);
+	echo oci_num_rows($stid);
+	if (oci_execute($stid)){ 
+    usleep(100); 
+    echo "<TABLE border \"1\">"; 
+    $first = 0; 
+    while ($row = @oci_fetch_assoc($stid)){ 
+            if (!$first){ 
+                    $first = 1; 
+                    echo "<TR><TH>"; 
+                    echo implode("</TH><TH>",array_keys($row)); 
+                    echo "</TH></TR>\n"; 
+            } 
+            echo "<TR><TD>"; 
+            echo @implode("</TD><TD>",array_values($row)); 
+            echo "</TD></TR>\n"; 
+    } 
+    echo "</TABLE>"; 
+?>
 
 <?php
 if(isset($_POST['formSubmit']))

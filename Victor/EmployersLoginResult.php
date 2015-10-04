@@ -2,15 +2,15 @@
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
-	header("Location: ApplicantsLogin.php");
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
+	header("Location: EmployersLogin.php");
 }
 ?>
 
-<!-- Basic portal style access for applicants. Is a placeholder till we get proper sidebars -->
+<!-- Display result of Applicant login -->
 
 <html>
-<head> <title> Placeholder portal </title> 
+<head> <title> Welcome </title> 
 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -25,17 +25,15 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 	<div class="container-fluid tiffblue">
 		<div class="col-xs-offset-3 col-xs-6">
 			<div class="row">
-				<h1 class="title"> Applicant Portal</h1>
+				<h1 class="title"> Employer Login Result</h1>
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
 					<?php
-							echo "Welcome, applicant ".$_SESSION["Username"].".<br>";
+							echo "Welcome ".$_SESSION["Username"].", you are now logged in.";
+							
 					?>
-					 <a href="Application.php">Apply for a job</a> <br>
-					 <a href="ApplicationDisplay.php" >View job application status</a> <br>
-					 <a href="ApplicantsBrowseJobs.php" >Browse Jobs</a> <br>
-					 <a href="Logout.php"> Logout </a> <br>
+					<meta http-equiv="refresh" content="2; url=EmployersPortal.php" />
 				</div>
 			</div>
 		</div>

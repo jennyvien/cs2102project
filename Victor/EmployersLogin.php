@@ -4,15 +4,15 @@
 		$fail_flag = 1;
 		$_SESSION["Failed"] = 0;
 	}
-	elseif($_SESSION["LoggedIn"]==1 and $_SESSION["Applicant"] ==1){
-		header("Location: ApplicantsPortal.php");
+	elseif($_SESSION["LoggedIn"]==1 and $_SESSION["Employer"] == 1){
+		header("Location: EmployersPortal.php");
 	}
 	else{
 	}
  ?>
  <!-- Login page for Applicants -->
 <html>
-<head> <title> Applicant Login </title> 
+<head> <title> Employer Login </title> 
 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -27,7 +27,7 @@
 	<div class="container-fluid tiffblue">
 		<div class="col-xs-offset-3 col-xs-6">
 			<div class="row">
-				<h1 class="title"> Applicant Login</h1>
+				<h1 class="title"> Employer Login</h1>
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
@@ -68,7 +68,7 @@
 						var_dump($_POST);
 						echo '</pre>';
 						//Currently might be vulnerable to SQL injection
-						$sql = "SELECT * FROM Applicants";
+						$sql = "SELECT * FROM Employers";
 						$stid = oci_parse($dbh, $sql);
 						oci_execute($stid);
 						echo oci_num_rows($stid);
@@ -107,7 +107,7 @@
 					if(isset($_POST['Submit']))
 					{
 						//Currently might be vulnerable to SQL injection
-						$sql = 'SELECT * FROM  Applicants
+						$sql = 'SELECT * FROM  Employers
 								WHERE email = :email and
 								password = :password' ;
 						$stid = oci_parse($dbh, $sql);
@@ -120,10 +120,10 @@
 							$_SESSION["LoggedIn"] = 1;
 							$_SESSION["Username"] = $data["NAME"];
 							$_SESSION["Email"] = $data["EMAIL"];
-							$_SESSION["Applicant"] = 1;
-							$_SESSION["Employer"] = 0;
+							$_SESSION["Applicant"] = 0;
+							$_SESSION["Employer"] = 1;
 
-							echo '<META HTTP-EQUIV="Refresh" Content="0; URL=ApplicantsLoginResult.php">';
+							echo '<META HTTP-EQUIV="Refresh" Content="0; URL=EmployersLoginResult.php">';
 						}
 						else{
 							$_SESSION["Failed"] = 1;

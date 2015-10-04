@@ -2,8 +2,8 @@
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
-	header("Location: ApplicantsLogin.php");
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
+	header("Location: EmployersLogin.php");
 }
 ?>
 
@@ -32,9 +32,8 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 					<?php
 							echo "Welcome, applicant ".$_SESSION["Username"].".<br>";
 					?>
-					 <a href="Application.php">Apply for a job</a> <br>
-					 <a href="ApplicationDisplay.php" >View job application status</a> <br>
-					 <a href="ApplicantsBrowseJobs.php" >Browse Jobs</a> <br>
+					 <a href="EmployerSubmitOffer.php">Submit a job offer</a> <br>
+					 <a href="EmployerViewApplications" >View applications to your job offers</a> <br>
 					 <a href="Logout.php"> Logout </a> <br>
 				</div>
 			</div>
