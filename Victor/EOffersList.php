@@ -1,3 +1,16 @@
+<?php
+session_start();
+if($_SESSION["Failed"] == 1){
+    $fail_flag = 1;
+    $_SESSION["Failed"] = 0;
+}
+elseif($_SESSION["LoggedIn"]==1 and $_SESSION["Employer"] == 1){
+    header("Location: EmployersPortal.php");
+}
+else{
+}
+
+?>
 <html>
 <head> <title> Offers Submitted </title>
 <body bgcolor="pink">
@@ -15,10 +28,13 @@
  * had committed before
  * and an option to submit
  * another.
+ * This page will be shown
+ * after log in.
+ *
  */
 
 putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
+$dbh = ocilogon('e0009149', 'crse1510', '(DESCRIPTION =
 	(ADDRESS_LIST =
 	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 	)
@@ -29,23 +45,13 @@ $dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
 ?>
 
 <form>
-    Login via Email: <input type="text" name="email" id="email"><br><br>
-    Password:<input type="text" name="password" id="password"><br><br>
+
     <button type="button">Submit New Offer</button> <!-- This button is linked to Employer Submit Offer page>
 </form>
 
 <?php
 {
-    $sql1 = "Select count(*) From employers Where email='".$_POST['email']."' And password='".$_POST['password']."'";
-    $stid1 = oci_parse($dbh, $sql1);
-    oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
-    oci_free_statement($stid1);
-    $result = oci_num_rows($sql1);
-    if($result<1){
-        echo "Incorrect Email or Password";
-    }
-
-    $sql1 = "SELECT * FROM JobOffers j Where Employers = (SELECT email FROM Employers WHERE email = '".$_GET['email']."')";
+    $sql1 = "SELECT * FROM JobOffers j Where Employers = (SELECT email FROM Employers WHERE email = '".$_GET['email']."') ORDER BY j.jobnum";
     $stid=oci_parse($dbh, $sql);
     oci_execute($stid, OCI_DEFAULT);
     while($row = oci_fetch_array($stid)) {
