@@ -9,7 +9,7 @@ password varchar(255) NOT NULL --HASH THE PASSWORDS. FRAMEWORKS SHOULD HANDLE TH
 );
 
 create table JobOffers(
-jobnum raw(16) default sys_guid(),
+jobnum int NOT NULL,
 Employers varchar(255),
 title varchar(255) NOT NULL,
 keywords varchar(255) NOT NULL, --CSV
@@ -19,7 +19,8 @@ country varchar(255) NOT NULL, --DROPDOWN MENU PRECOMPILED?
 area_code int NOT NULL,
 pos_type varchar(255) NOT NULL, -- part/fulltime
 salary int NOT NULL,
-Primary Key (jobnum, Employers),
+Primary Key (jobnum),
+CONSTRAINT jobnum_unique UNIQUE(jobnum),
 foreign key (Employers) references Employers(email)
 );
 
