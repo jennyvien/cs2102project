@@ -10,7 +10,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 <!-- Basic portal style access for applicants. Is a placeholder till we get proper sidebars -->
 
 <html>
-<head> <title> Placeholder portal </title> 
+<head> <title> Employer portal </title> 
 
 <link rel="stylesheet" href="CSS/styles.css">
 <!-- Latest compiled and minified CSS -->
@@ -25,7 +25,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 	<div class="container-fluid tiffblue">
 		<div class="col-xs-offset-3 col-xs-6">
 			<div class="row">
-				<h1 class="title"> Applicant Portal</h1>
+				<h1 class="title"> Employer Portal</h1>
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">

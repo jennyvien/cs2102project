@@ -120,6 +120,7 @@
 							$_SESSION["LoggedIn"] = 1;
 							$_SESSION["Username"] = $data["NAME"];
 							$_SESSION["Email"] = $data["EMAIL"];
+							$_SESSION["Company"] = "PLACEHOLDER_IN_EMPLOYERS_LOGIN";
 							$_SESSION["Applicant"] = 0;
 							$_SESSION["Employer"] = 1;
 
