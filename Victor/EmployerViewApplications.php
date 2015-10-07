@@ -34,15 +34,18 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 	?>
 	<?php
 	{
-    $sql1 = "SELECT * FROM JobOffers j Where Employers = (SELECT email FROM Employers WHERE email = '".$_GET['email']."') ORDER BY j.jobnum";
+    $sql1 = "SELECT a.applicants, a.date_applied FROM Applications a Where Employers = (SELECT email FROM Employers WHERE email = '".$_SESSION["Email"]."') ORDER BY a.jobnum";
 	    $stid=oci_parse($dbh, $sql1);
 	    oci_execute($stid, OCI_DEFAULT);
 	    while($row = oci_fetch_array($stid)) {
-	        echo '<tr>';
-	        foreach($row as $field) {
-	            echo '<td>' . htmlspecialchars($field) . '</td>';
-	        }
-	        echo '</tr>';
+	        echo <tr>;
+	        echo <td>;
+	        echo .$row[0].;
+	        echo </td>;
+	        echo <td>;
+	        echo .$row[1].;
+	        echo </td>;
+	        echo </tr>;
 	    }
 
 	}
