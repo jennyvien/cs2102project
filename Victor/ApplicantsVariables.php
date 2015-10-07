@@ -2,23 +2,23 @@
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
 	header("Location: ApplicantsLogin.php");
 }
 ?>
-<?php
-	$ora_acc = file_get_contents('oracle_acc.ini');
-	putenv('ORACLE_HOME=/oraclient');
-	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-		(ADDRESS_LIST =
-		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-		)
-		(CONNECT_DATA =
-		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-		)
-	  )');
-?>
 
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+	(ADDRESS_LIST =
+	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+	)
+  )');
+?>
 <!-- Browse all available jobs (applicant-side) -->
 <html>
 <head> <title> All Jobs </title> 
@@ -36,8 +36,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 		border: 1px solid black;
 		padding: 0.4em;
 	}
-
-
 </style>
 </head>
 <body>
@@ -48,7 +46,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
-					
 					<!-- Display all jobs with a link to the job page -->
 					<?php
 						/*$sql = "INSERT INTO JobOffers

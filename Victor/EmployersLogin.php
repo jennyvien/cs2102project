@@ -10,6 +10,18 @@
 	else{
 	}
  ?>
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+	(ADDRESS_LIST =
+	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+	)
+  )');
+?>
  <!-- Login page for Applicants -->
 <html>
 <head> <title> Employer Login </title> 
@@ -31,17 +43,6 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
-					<?php
-					putenv('ORACLE_HOME=/oraclient');
-					$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
-						(ADDRESS_LIST =
-						 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-						)
-						(CONNECT_DATA =
-						 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-						)
-					  )');
-					?>
 					<?php
 						if ($fail_flag == 1){
 							echo "Incorrect login details.";

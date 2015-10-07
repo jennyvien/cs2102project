@@ -1,3 +1,15 @@
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+	(ADDRESS_LIST =
+	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+	)
+  )');
+?>
 <!-- Register a new applicant -->
 
 <html>
@@ -20,17 +32,6 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
-					<?php
-					putenv('ORACLE_HOME=/oraclient');
-					$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
-						(ADDRESS_LIST =
-						 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-						)
-						(CONNECT_DATA =
-						 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-						)
-					  )');
-					?>
 					<form method="POST">
 						Name: <input type="text" name="Name" id="Name"><br><br>
 						Email: <input type="text" name="Email" id="Email"><br><br>
