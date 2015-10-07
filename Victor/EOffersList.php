@@ -37,7 +37,14 @@ $dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
 <?php
 {
     $sql1 = "Select count(*) From employers Where email='".$_POST['email']."' And password='".$_POST['password']."'";
-    $stid1 = oci_parse($dbh, $sql1);
+    $stid1 = oci_parse($dbh, $sql1);\text{Let t, d, and D be a term, a document in the corpus and the entire corpus respectively}\\
+\text{TF(t,d), the Term-Frequency, is defined as the frequency of a term t in a document D: }f_{t,d}\\
+
+\text{IDF(t,d), the Term-Frequency, is defined as } \\
+ln(\frac{N}{f_{t,D}}), \\
+\text{where }\\
+TF-IDF(t,d,D) = tf(t, d) X (IDF(t, D) + 1),\text{ Where t is the term, d is the do }
+
     oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
     oci_free_statement($stid1);
     $result = oci_num_rows($sql1);
