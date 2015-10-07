@@ -42,7 +42,7 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 	Password: <input type ="text" name ="Password" id="Password">
 	<input type="submit" name="formSubmit" value="Search" > 
 </form>
-<?php
+
  	
 <?php
 if(isset($_POST['formSubmit']))

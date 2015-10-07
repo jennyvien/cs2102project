@@ -19,8 +19,7 @@ country varchar(255) NOT NULL, --DROPDOWN MENU PRECOMPILED?
 area_code int NOT NULL,
 pos_type varchar(255) NOT NULL, -- part/fulltime
 salary int NOT NULL,
-Primary Key (jobnum),
-CONSTRAINT jobnum_unique UNIQUE(jobnum),
+Primary Key (jobnum,Employers),
 foreign key (Employers) references Employers(email)
 );
 
@@ -38,7 +37,7 @@ date_applied date not null,
 writeup varchar(256) not null,
 
 Employers varchar(255) not null,
-JobOffers raw(16) not null,
+JobOffers int not null,
 
 primary key(applicants,Employers,JobOffers),
 foreign key (applicants) references Applicants(email),
