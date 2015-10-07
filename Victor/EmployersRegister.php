@@ -47,7 +47,7 @@ if(isset($_POST['formSubmit']))
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
 	$_SESSION["LoggedIn"] = 1;
-	$_SESSION["FirstName"] = $_POST["FirstName"]
+	$_SESSION["FirstName"] = $_POST["FirstName"];
 	$_SESSION["Email"] = $_POST["Email"];
 	$_SESSION["Company"] = $_POST["Company"];
 	$_SESSION["Applicant"] = 0;
