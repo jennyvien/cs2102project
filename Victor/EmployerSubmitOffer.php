@@ -6,6 +6,18 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
     header("Location: EmployersLogin.php");
 }
 ?>
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+     (SERVICE_NAME = sid3.comp.nus.edu.sg)
+    )
+  )');
+?>
 <html>
 <head> <title> Submit Job Offer as Employer </title>
 <body bgcolor="pink">
@@ -14,17 +26,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
             <h1> Submit Job Offer as Employer </h1>
         </td> </tr>
 </table>
-<?php
-putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
-	(ADDRESS_LIST =
-	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-	)
-	(CONNECT_DATA =
-	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-	)
-  )');
-?>
 
 <form>
     Your name:<input type="text" name="Employers" id="Employers"><br><br> <!--Maybe indicate name after login?-->
