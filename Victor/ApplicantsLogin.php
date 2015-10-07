@@ -32,8 +32,9 @@
 			<div class="row">
 				<div class="col-xs-offset-2 col-xs-8">
 					<?php
+					$ora_acc = file_get_contents('oracle_acc.ini');
 					putenv('ORACLE_HOME=/oraclient');
-					$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
+					$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 						(ADDRESS_LIST =
 						 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 						)

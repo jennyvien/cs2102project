@@ -1,3 +1,18 @@
+<?php
+	session_start();
+?>
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+	(ADDRESS_LIST =
+	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+	)
+  )');
+?>
 <html>
 <head> <title> Register Employers </title>
 <link rel="stylesheet" href="CSS/styles.css">
@@ -15,17 +30,6 @@
 <h1> Register as Employer</h1>
 </td> </tr>
 </table>
-<?php
-putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
-	(ADDRESS_LIST =
-	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-	)
-	(CONNECT_DATA =
-	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-	)
-  )');
-?>
 <form method="POST">
 	Email:<input type="text" name="Email" id="Email"><br><br/>
 	Company:<input type="text" name="Company" id="Company"><br><br/>
@@ -43,7 +47,13 @@ if(isset($_POST['formSubmit']))
 	$stid = oci_parse($dbh, $sql);
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
-	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicationDisplay.php\">";	
+	$_SESSION["LoggedIn"] = 1;
+	$_SESSION["FirstName"] = $_POST["FirstName"];
+	$_SESSION["Email"] = $_POST["Email"];
+	$_SESSION["Company"] = $_POST["Company"];
+	$_SESSION["Applicant"] = 0;
+	$_SESSION["Employer"] = 1;
+	echo "<meta http-equiv=\"refresh\" content=\"0;EmployersPortal.php\">";	
 }
 ?>
 

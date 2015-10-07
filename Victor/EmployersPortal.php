@@ -33,7 +33,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 							echo "Welcome, applicant ".$_SESSION["Username"].".<br>";
 					?>
 					 <a href="EmployerSubmitOffer.php">Submit a job offer</a> <br>
-					 <a href="EmployerViewApplications" >View applications to your job offers</a> <br>
+					 <a href="EmployerViewApplications.php" >View applications to your job offers</a> <br>
 					 <a href="Logout.php"> Logout </a> <br>
 				</div>
 			</div>
