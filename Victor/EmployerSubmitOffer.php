@@ -53,7 +53,9 @@ if(isset($_GET['jobSubmit']))
     $jobnum_stid = oci_parse($dbh, $jobnum_sql);
     oci_execute($jobnum_stid, OCI_COMMIT_ON_SUCCESS);
     $jobnumrow = oci_fetch($jobnum_stid);
+    $jobnumrow = $jobnumrow+1;
     oci_free_statement($jobnum_stid);
+
 
   //  $sql2 = "Insert into JobOffers Values (:jobnum, ':employers', ':title', ':keywords', ':description', ':city', ':country', :area_code, ':pos_type,' :salary)";
   //  oci_bind_by_name($stid, ":jobnum", $jobnumrow[0]);
