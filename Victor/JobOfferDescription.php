@@ -25,14 +25,8 @@ $dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
 <?php
 	$job_title=$_GET['job_title'];
 	echo "Title: " . $job_title;
-	
-	$sql="SELECT e.company FROM employers e WHERE e.email='" . $_GET['employer'] . "'";
-	$stid=oci_parse($dbh, $sql);
-	oci_execute($stid, OCI_DEFAULT);
-	$row = oci_fetch_array($stid);
-	$employer=$row[0];
-	echo "<br> Company: " . $employer . "";
-	
+	$company=$_GET['company'];
+	echo "<br> Company: " . $company . "";	
 	$description=$_GET['description']; 
 	echo "<br> Job Description: " . $description . "";
 	$city=$_GET['city'];
