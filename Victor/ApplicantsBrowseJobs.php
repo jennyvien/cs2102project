@@ -1,10 +1,12 @@
 <?php
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
+
 session_start();
 if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	header("Location: ApplicantsLogin.php");
 }
+
 ?>
 <!-- Browse all available jobs (applicant-side) -->
 <html>
@@ -35,7 +37,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 				<div class="col-xs-offset-2 col-xs-8">
 					<?php
 					putenv('ORACLE_HOME=/oraclient');
-					$dbh = ocilogon('a0110801', 'crse1510', '(DESCRIPTION =
+					$dbh = ocilogon('e0009809', 'crse1510', '(DESCRIPTION =
 						(ADDRESS_LIST =
 						 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 						)
@@ -60,36 +62,44 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 					<table id="table">
 						<tr>
 							<th>Title</th>
-							<th>Employer</th>
+							<th>Company</th>
 							<th>Salary</th>
 							<th>Location</th>
 						</tr>
 					<?php
 						
 						while ($row = oci_fetch_array($stid)){
-							//var_dump($row);
+							//Get company from employers
+							$sql="SELECT * FROM employers e WHERE e.email='" .$row["EMPLOYERS"]. "'";
+							$stid=oci_parse($dbh, $sql);
+							oci_execute($stid, OCI_DEFAULT);
+							$employerInfo = oci_fetch_array($stid);
+							
+							//Replace spaces with %20
 							$job_title=str_replace(' ', '%20', $row["TITLE"]);
-							$employer=str_replace(' ', '%20', $row["EMPLOYERS"]);
+							$company=str_replace(' ', '%20', $employerInfo["COMPANY"]);
 							$job_description=str_replace(' ', '%20', $row["DESCRIPTION"]);
 							$city=str_replace(' ', '%20', $row["CITY"]);
 							$country=str_replace(' ', '%20', $row["COUNTRY"]);
 							$pos_type=str_replace(' ', '%20', $row["POS_TYPE"]);
 							$salary=$row["SALARY"];
 							$jobnum=$row[7];
+							
+							//Start printing table
 							echo "<tr>\n";
-
-							echo "<td>".$employer."</td>\n";
-							echo "<td>".$job_title."</td>\n";
-							echo "<td>".$salary."</td>\n";
-							echo "<td>".$city.", ".$country."</td>\n";
+							
+							echo "<td>".$row["TITLE"]."</td>\n";
+							echo "<td>".$employerInfo["COMPANY"]."</td>\n";
+							echo "<td>"."$".$row["SALARY"]."/year"."</td>\n";
+							echo "<td>".$row["CITY"].", ".$row["COUNTRY"]."</td>\n";
 							
 							// URL for link to the specific job
 							echo "<td>";
 							echo "<a href=JobOfferDescription.php?";
 							echo "job_title=";
 							echo $job_title;
-							echo "&employer=";
-							echo $employer;
+							echo "&company=";
+							echo $company;
 							echo "&jobnum=";
 							echo bin2hex($row["JOBNUM"]);
 							echo "&description=";
