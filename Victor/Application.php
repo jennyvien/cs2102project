@@ -41,8 +41,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 <form method="POST">
 
 	Write Up:<br>	
-	<textarea rows="4" cols="50" name="WriteUp" id="WriteUp">
-	Write up..</textarea><br>
+	<textarea rows="4" cols="50" name="WriteUp" id="WriteUp">Write up..</textarea><br>
 	<input type="submit" name="formSubmit" value="Submit">
 </form>
 
@@ -54,25 +53,14 @@ if(isset($_POST['formSubmit']))
 	date_default_timezone_set('UTC');
 
 
-	$sql1 = "select count(*) from applicants where email='".$_POST['Email']."' and password='".$_POST['Password']."'";
-	$stid1 = oci_parse($dbh, $sql1);
-	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
-	$row = oci_fetch_array($stid1);
-	echo "still okay";
+	$sql = "Insert into Applications values('".$_SESSION['Email']."',sysdate,'".$_POST['WriteUp']."','".$_GET['employer']."', '".$_GET['jobnum']."')";
+	$stid= oci_parse($dbh, $sql);
+	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
+	oci_free_statement($stid);
 
-
-	if ($row>0){
-
-		$sql = "Insert into Applications values('".$_POST['Email']."',sysdate,'".$_POST['WriteUp']."','".$_GET['employer']."', '".$_GET['jobnum']."')";
-		$stid= oci_parse($dbh, $sql);
-		oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
-		oci_free_statement($stid);
-	}else{
-		echo "Cannot find user";
-	}
 	oci_free_statement($stid1);
 
-	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
+	//echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 }
 ?>
 <?php

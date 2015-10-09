@@ -3,6 +3,7 @@
 // To use, place as the FIRST LINE of the page
 
 session_start();
+
 if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	header("Location: ApplicantsLogin.php");
 }
@@ -86,6 +87,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 							$city=str_replace(' ', '%20', $row["CITY"]);
 							$country=str_replace(' ', '%20', $row["COUNTRY"]);
 							$pos_type=str_replace(' ', '%20', $row["POS_TYPE"]);
+							$employer = str_replace(" ", '%20', $row['EMPLOYERS']);
 							$salary=$row["SALARY"];
 							$jobnum=$row[7];
 							
@@ -115,7 +117,9 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 							echo "&pos_type=";
 							echo $pos_type;	
 							echo "&salary=";
-							echo $salary;			
+							echo $salary;
+							echo "&employer=";
+							echo $employer;			
 							echo ">"; 
 							echo "LINK";
 							echo "</a>";

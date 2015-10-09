@@ -3,7 +3,7 @@
 // To use, place as the FIRST LINE of the page
 session_start();
 if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
-	header("Location: EmployerLogin.php");
+	header("Location: ApplicantsLogin.php");
 }
 ?>
 
@@ -33,7 +33,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 							echo "Welcome ".$_SESSION["Username"].", you are now logged in.";
 							
 					?>
-					<meta http-equiv="refresh" content="2; url=EmployersPortal.php" />
+					<meta http-equiv="refresh" content="2; url=ApplicantsPortal.php" />
 				</div>
 			</div>
 		</div>
