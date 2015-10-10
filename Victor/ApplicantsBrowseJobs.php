@@ -3,22 +3,11 @@
 // To use, place as the FIRST LINE of the page
 
 session_start();
+
 if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	header("Location: ApplicantsLogin.php");
 }
 
-?>
-<?php
-	$ora_acc = file_get_contents('oracle_acc.ini');
-	putenv('ORACLE_HOME=/oraclient');
-	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-		(ADDRESS_LIST =
-		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-		)
-		(CONNECT_DATA =
-		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-		)
-	  )');
 ?>
 
 <!-- Browse all available jobs (applicant-side) -->
@@ -41,6 +30,20 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 
 
 </style>
+
+<?php
+	$ora_acc = file_get_contents('oracle_acc.ini');
+	putenv('ORACLE_HOME=/oraclient');
+	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+		(ADDRESS_LIST =
+		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+		)
+		(CONNECT_DATA =
+		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+		)
+	  )');
+?>
+
 </head>
 <body>
 	<div class="container-fluid tiffblue">
@@ -86,6 +89,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 							$city=str_replace(' ', '%20', $row["CITY"]);
 							$country=str_replace(' ', '%20', $row["COUNTRY"]);
 							$pos_type=str_replace(' ', '%20', $row["POS_TYPE"]);
+							$employer = str_replace(" ", '%20', $row['EMPLOYERS']);
 							$salary=$row["SALARY"];
 							$jobnum=$row[7];
 							
@@ -105,7 +109,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 							echo "&company=";
 							echo $company;
 							echo "&jobnum=";
-							echo bin2hex($row["JOBNUM"]);
+							echo $row["JOBNUM"];
 							echo "&description=";
 							echo $job_description;
 							echo "&city=";
@@ -115,7 +119,9 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 							echo "&pos_type=";
 							echo $pos_type;	
 							echo "&salary=";
-							echo $salary;			
+							echo $salary;
+							echo "&employer=";
+							echo $employer;			
 							echo ">"; 
 							echo "LINK";
 							echo "</a>";
