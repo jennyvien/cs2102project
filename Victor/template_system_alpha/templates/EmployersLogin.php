@@ -69,18 +69,6 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
     } 
     echo "</TABLE>"; 
 }
-$email = "asd";
-$password = "ddd";
-$sql = "SELECT * FROM  Applicants
-			WHERE email = :email and
-			password = :password";
-	$stid = oci_parse($dbh, $sql);
-	oci_bind_by_name($stid, ":email", $email);
-	oci_bind_by_name($stid, ":password", $password);
-	oci_execute($stid);
-	$data = oci_fetch_array($stid);
-	var_dump($data);
-	echo count($data);
 ?>
 
 <?php

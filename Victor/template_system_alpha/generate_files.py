@@ -2,7 +2,7 @@
 import os
 from jinja2 import Environment, FileSystemLoader
 
-debug = 0
+debug = 0	
 
 # fix the output path
 output = "output"
