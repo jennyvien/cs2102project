@@ -1,0 +1,27 @@
+.tiffblue{
+	background-color:#60DFE5;
+}
+.turquoise{
+	background-color: #45EBD7;
+}
+.title{
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+#Resume{
+	text-align: left;
+}
+.carousel-inner>.item>img{
+	margin: auto;
+	height: 250px !important;
+}
+
+.addMargin{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.MT50{
+	margin-top: 50px;
+}
