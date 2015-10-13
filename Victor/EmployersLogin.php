@@ -54,7 +54,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 					?>
 					<form method="POST">
 						Email: <input type="text" name="Email" id="Email"><br><br>
-						Password: <input type="text" name="Password" id="Password"><br><br>
+						Password: <input type="password" name="Password" id="Password"><br><br>
 						<input type="submit" value = "Submit", name="Submit">
 					</form>
 
