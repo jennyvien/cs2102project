@@ -55,16 +55,9 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 				<div class="col-xs-offset-2 col-xs-8">
 					<!-- Display all jobs with a link to the job page -->
 					<?php
-						/*$sql = "INSERT INTO JobOffers
-						(EMPLOYERS, TITLE, KEYWORDS, DESCRIPTION, CITY, COUNTRY, AREA_CODE,
-						POS_TYPE, SALARY)
-						VALUES
-						'esyir', 'esyir_title', 'key', 'description', 'city', 'country', 20, 'part',
-						1000000 ";*/
 						$sql = 'SELECT * FROM  JobOffers';
 						$stid = oci_parse($dbh, $sql);
-						oci_execute($stid);
-
+						oci_execute($stid, OCI_DEFAULT);
 					?>
 					<table id="table">
 						<tr>
@@ -77,10 +70,10 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 						
 						while ($row = oci_fetch_array($stid)){
 							//Get company from employers
-							$sql="SELECT * FROM employers e WHERE e.email='" .$row["EMPLOYERS"]. "'";
-							$stid=oci_parse($dbh, $sql);
-							oci_execute($stid, OCI_DEFAULT);
-							$employerInfo = oci_fetch_array($stid);
+							$sql1="SELECT * FROM employers e WHERE e.email='" .$row["EMPLOYERS"]. "'";
+							$stid1=oci_parse($dbh, $sql);
+							oci_execute($stid1, OCI_DEFAULT);
+							$employerInfo = oci_fetch_array($stid1);
 							
 							//Replace spaces with %20
 							$job_title=str_replace(' ', '%20', $row["TITLE"]);
@@ -161,8 +154,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 						oci_free_statement($stid);
 						oci_close($dbh);
 					}
-				
-
 					?>
 				</div>
 			</div>

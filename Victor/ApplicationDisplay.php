@@ -1,11 +1,30 @@
 <?php
-// Standard login required
+// Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Company"] = 1){
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
 	header("Location: ApplicantsLogin.php");
 }
 ?>
+
+<!--Display a list of applications applicant has submitted. -->
+<html>
+<head> <title> Job Application </title> 
+
+<link rel="stylesheet" href="CSS/styles.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+	#table, #table tr, #table td, #table th {
+		border: 1px solid black;
+		padding: 0.4em;
+	}
+</style>
 
 <?php
 $ora_acc = file_get_contents('oracle_acc.ini');
@@ -19,80 +38,47 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	)
   )');
 ?>
-
-<!-- Show the status of all job applications that the applicant has applied for -->
-
-<html>
-<head> <title>Application Listings</title> 
-<link rel="stylesheet" href="CSS/styles.css">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
-
 <body>
-<table>
-<tr> <td column = '100'>
-<h1> Application to Jobs Submitted</h1>
-</td> </tr>
-<form method= "POST">
-	Company email: <input type="text" name="Cemail" id="Cemail">
-	Password: <input type ="text" name ="Password" id="Password">
-	<input type="submit" name="formSubmit" value="Search" > 
-</form>
-
- 	
-<?php
-if(isset($_POST['formSubmit']))
-{	
-	$sql1 = "select count(*) from employers where email='".$_POST['Cemail']."' and password='".$_POST['Password']."'";
-	$stid1 = oci_parse($dbh, $sql1);
-	oci_execute($stid1,OCI_COMMIT_ON_SUCCESS);
-	$row1 = oci_fetch_array($stid1);
-	if ($row1[0]>0){
-		//$sql="SELECT a.applicants,a.joboffers,a.date_applied,a.writeup,a.joboffers FROM applications a where employers ='".$_POST['Cemail']."' ORDER BY a.date_applied";
-		$sql="SELECT a.applicants,a.joboffers,a.date_applied,a.writeup,a.joboffers FROM applications a where a.email ='".$_SESSION["email"]."' ORDER BY a.date_applied";
-		$stid=oci_parse($dbh, $sql);	
-		oci_execute($stid, OCI_DEFAULT);
-		while($row = oci_fetch_array($stid)) {
-			$applicants=str_replace(' ', '%20', $row[0]);
-			$jobid=str_replace(' ', '%20', $row[1]);
-			$date=str_replace(' ', '%20', $row[2]);
-			$writeup=str_replace(' ', '%20', $row[3]);
-			$jobid=str_replace(' ', '%20', $row[4]);
-			echo "<tr>";
-			echo "<td>";
-			echo "<a href=ApplicantsDescription.php?";
-			echo "applicants=";
-			echo $applicants;
-			echo "&Cemail=";
-			echo $_post['Cemail'];
-			echo "&jobid=";
-			echo $jobid;
-			echo "&date=";
-			echo $date;
-			echo "&writeup=";
-			echo $writeup;		
-			echo "&jobid=";
-			echo $jobid;	
-			echo ">"; 
-			echo $row[0];
-			echo "</a>";
-			echo "</td>";
-			echo "</tr>";	
-
-		}
-
-	}
-}
-?>
-
-<?php
-oci_close($dbh);
-?>
+<div class="container-fluid tiffblue">
+		<div class="col-xs-offset-3 col-xs-6">
+			<div class="row">
+				<h1 class="title">Your Applications</h1>
+			</div>
+			<div class="row">
+				<div class="col-xs-offset-2 col-xs-8">
+				<?php
+					$sql="SELECT a.date_applied, j.title, e.company
+						FROM applications a, joboffers j, employers e
+						WHERE a.applicants = '" .$_SESSION["Email"]."'
+						and a.employers = e.email
+						and a.joboffers = j.jobnum";	
+					$stid=oci_parse($dbh, $sql);
+					oci_execute($stid, OCI_DEFAULT);
+				?>	
+				<table id="table">
+					<tr>
+						<th>Date Applied</th>
+						<th>Position</th>
+						<th>Company</th>
+					</tr>
+				<?php		
+					while($row = oci_fetch_array($stid)) {
+						echo "<tr>";
+						echo "<td>" .$row[0]. "</td>";
+						echo "<td>" .$row[1]. "</td>";
+						echo "<td>" .$row[2]. "</td>";
+						echo "</tr>";
+					}
+					
+					oci_free_statement($stid);
+					oci_close($dbh);
+				?>
+				</table>
+				</div>
+			</div>	
+		</div>	
+	</div>	
 </body>
 </html>

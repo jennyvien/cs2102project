@@ -58,7 +58,7 @@ if(isset($_POST['formSubmit']))
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
 
-	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
+	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicantsBrowseJobs.php\">";	
 }
 ?>
 <?php
