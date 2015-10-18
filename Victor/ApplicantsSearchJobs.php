@@ -10,7 +10,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 <?php
 $ora_acc = file_get_contents('oracle_acc.ini');
 putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon('e0009149', 'crse1510', '(DESCRIPTION =
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	(ADDRESS_LIST =
 	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
 	)
@@ -39,18 +39,18 @@ $dbh = ocilogon('e0009149', 'crse1510', '(DESCRIPTION =
 </td> </tr>
 </table>
 
-<form>
+<form method = "POST">
 	Search:<input type="text" name="searchContent" id="searchContent"><br><br>
-	<input type="submit" name="search" value="Submit">
+	<input type="submit" name="formSubmit" value="Submit">
 </form>
 
 
 <?php
 if(isset($_POST['formSubmit']))
 {
-	$sql = "SELECT title, description FROM JobOffers WHERE title LIKE '".$_POST['searchContent']."' OR description LIKE '".$_POST['searchContent']."'";
+	$sql = "SELECT title, description FROM JobOffers WHERE title = '".$_POST['searchContent']."'OR description = '".$_POST['searchContent']."'"; 
 	$stid = oci_parse($dbh, $sql);
-	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
+	oci_execute($stid,OCI_DEFAULT);
 	$result = oci_num_rows($sql);
 	if($result<1){
 		echo "No result founded.";
@@ -58,11 +58,10 @@ if(isset($_POST['formSubmit']))
 	while($row = oci_fetch_array($stid)) {
 		echo "<tr>";
 		echo "<td>";
-		echo "$row[0]";
+		echo $row[0];
 		echo "</td>";
 		echo "</tr>";
-	}
-	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
+	}	
 }
 ?>
 <?php
