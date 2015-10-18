@@ -2,32 +2,53 @@
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
 	header("Location: ApplicantsLogin.php");
 }
 ?>
+
 <?php
-	putenv('ORACLE_HOME=/oraclient');
-	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-		(ADDRESS_LIST =
-		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-		)
-		(CONNECT_DATA =
-		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-		)
-	  )');
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon('e0009149', 'crse1510', '(DESCRIPTION =
+	(ADDRESS_LIST =
+	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+	)
+	(CONNECT_DATA =
+	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+	)
+  )');
 ?>
-<!-- Search Job offer descriptions and titles for word -->
+
+<!-- Apply for a specific job (from browse screen) -->
+<html>
+<head> <title> Search Jobs </title> 
+<link rel="stylesheet" href="CSS/styles.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body bgcolor="pink">
+<table>
+<tr> <td column = '100'>
+<h1> Search Jobs</h1>
+</td> </tr>
+</table>
 
 <form>
 	Search:<input type="text" name="searchContent" id="searchContent"><br><br>
 	<input type="submit" name="search" value="Submit">
 </form>
+
+
 <?php
-if(isset($_GET['search']))
+if(isset($_POST['formSubmit']))
 {
-	// Show only job title and create a link to display job? Or just display everything?
-	$sql = "SELECT * FROM JobOffers WHERE title LIKE '".$_POST['searchContent']."' OR description LIKE '".$_POST['searchContent']."'";
+	$sql = "SELECT title, description FROM JobOffers WHERE title LIKE '".$_POST['searchContent']."' OR description LIKE '".$_POST['searchContent']."'";
 	$stid = oci_parse($dbh, $sql);
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	$result = oci_num_rows($sql);
@@ -41,6 +62,12 @@ if(isset($_GET['search']))
 		echo "</td>";
 		echo "</tr>";
 	}
+	echo "<meta http-equiv=\"refresh\" content=\"0;JobOffers.php\">";	
 }
 ?>
+<?php
+oci_close($dbh);
+?>
 
+</body>
+</html>

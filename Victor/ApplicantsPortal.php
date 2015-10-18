@@ -35,7 +35,9 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 					 <a href="Application.php">Apply for a job</a> <br>
 					 <a href="ApplicationDisplay.php" >View job application status</a> <br>
 					 <a href="ApplicantsBrowseJobs.php" >Browse Jobs</a> <br>
+					 <a href="ApplicantsSearchJobs.php" >Search Jobs</a> <br>
 					 <a href="Logout.php"> Logout </a> <br>
+					 
 				</div>
 			</div>
 		</div>
