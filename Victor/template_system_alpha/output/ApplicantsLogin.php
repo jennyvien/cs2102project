@@ -59,7 +59,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 		</ul>
 	</div>
 	<div id="search">
-		<form method="get" action="">
+		<form method="get" action="ApplicantsSearchJobs.php">
 			<fieldset>
 				<input type="text" name="s" id="search-text" title="Search our website" size="15" value="" />
 				<input type="submit" id="search-submit" value="GO" />
@@ -92,7 +92,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 ?>
 	<form method="POST">
 	Email: <input type="text" name="Email" id="Email"><br><br>
-	Password: <input type="text" name="Password" id="Password"><br><br>
+	Password: <input type="password" name="Password" id="Password"><br><br>
 	<input type="submit" value = "Submit", name="Submit">
 </form>
 

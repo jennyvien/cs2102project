@@ -43,7 +43,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 		</ul>
 	</div>
 	<div id="search">
-		<form method="get" action="">
+		<form method="get" action="ApplicantsSearchJobs.php">
 			<fieldset>
 				<input type="text" name="s" id="search-text" title="Search our website" size="15" value="" />
 				<input type="submit" id="search-submit" value="GO" />

@@ -56,7 +56,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 		</ul>
 	</div>
 	<div id="search">
-		<form method="get" action="">
+		<form method="get" action="ApplicantsSearchJobs.php">
 			<fieldset>
 				<input type="text" name="s" id="search-text" title="Search our website" size="15" value="" />
 				<input type="submit" id="search-submit" value="GO" />

@@ -48,7 +48,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 <?php
 if(isset($_POST['formSubmit']))
 {
-	$sql = "SELECT title, description FROM JobOffers WHERE title = '".$_POST['searchContent']."'OR description = '".$_POST['searchContent']."'"; 
+	$sql = "SELECT title, description FROM JobOffers WHERE title LIKE '"."%".$_POST['searchContent']."%"."'OR description LIKE '"."%".$_POST['searchContent']."%"."'"; 
 	$stid = oci_parse($dbh, $sql);
 	oci_execute($stid,OCI_DEFAULT);
 	$result = oci_num_rows($sql);

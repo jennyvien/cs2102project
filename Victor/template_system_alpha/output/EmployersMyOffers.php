@@ -2,11 +2,22 @@
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
-	header("Location: ApplicantsLogin.php");
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
+    header("Location: EmployersLogin.php");
 }
 ?>
-
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+     (SERVICE_NAME = sid3.comp.nus.edu.sg)
+    )
+  )');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 	Maximus4T by 4Templates | http://www.4templates.com/free/ | @4templates
@@ -15,7 +26,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Maximus4T by 4Templates</title>
+<title>TITLE OF JOBOFFER SITE</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet" type="text/css" />
@@ -37,14 +48,13 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 	<div id="menu-content">
 		<ul id="menu">
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
-			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
-			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
-			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
-			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
+			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
+			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
+			<li><a href="Logout.php" accesskey="4" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">
-		<form method="get" action="ApplicantsSearchJobs.php">
+		<form method="get" action="">
 			<fieldset>
 				<input type="text" name="s" id="search-text" title="Search our website" size="15" value="" />
 				<input type="submit" id="search-submit" value="GO" />
@@ -66,7 +76,53 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					
+<?php
+$sql = "SELECT * from JobOffers WHERE Employers = '".$_SESSION["Email"]."'";
+$stid=oci_parse($dbh, $sql);
+oci_execute($stid, OCI_DEFAULT);
+//catch null values here
 
+//Iterate through the whole table, print needed data
+echo "ROW<br>";
+//echo var_dump(oci_fetch_array($stid));
+while (($row = oci_fetch_array($stid)) != false){
+  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
+  echo "<tr>";
+    echo "<td>";
+      echo "<strong>Title: </strong> ";
+      echo $row["TITLE"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>Location: </strong> ";
+      echo $row["CITY"].", ".$row["COUNTRY"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>Position: </strong> ";
+      echo $row["POS_TYPE"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>SALARY: </strong> ";
+      echo "$".$row["SALARY"];
+    echo "</td>";
+  
+    echo "<td style='text-align:right;'>";
+    echo "<a href ='#'><strong>Applicants: </strong> ". "0</a>";
+    echo "</td>";
+  echo "</tr>";
+  echo "<tr>";
+    echo "<td colspan = '4'>";
+      echo "<strong>Description: </strong><br>\n ";
+      echo $row["DESCRIPTION"];
+    echo "</td>";
+  echo "</tr>";
+  echo "</table>";
+  echo "<br>";
+}
+?>
+
+<?php
+oci_close($dbh);
+?>
 
 				</div>
 			</div>
