@@ -42,8 +42,8 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="#">Maximus4T</a></h1>
-			<p>Just another free theme by 4Templates</p>
+			<h1><a href="homepage.html">JobHunt</a></h1>
+			<p>Subtitle</p>
 		</div>
 	</div>
 </div>
@@ -54,6 +54,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
 			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
 			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
+			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">

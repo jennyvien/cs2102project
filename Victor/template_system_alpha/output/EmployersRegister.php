@@ -34,8 +34,8 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="#">JOBOFFERTHING</a></h1>
-			<p>SUBTITLE IF ANY</p>
+			<h1><a href="homepage.html">JobHunt</a></h1>
+			<p>Subtitle</p>
 		</div>
 	</div>
 </div>
