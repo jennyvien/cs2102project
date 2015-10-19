@@ -1,3 +1,12 @@
+<?php
+// Standard login required preamble
+// To use, place as the FIRST LINE of the page
+session_start();
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
+	header("Location: EmployersLogin.php");
+}
+?> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 	Maximus4T by 4Templates | http://www.4templates.com/free/ | @4templates
@@ -6,7 +15,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Maximus4T by 4Templates</title>
+<title>TITLE OF JOBOFFER SITE</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet" type="text/css" />
@@ -19,8 +28,8 @@
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="#">Maximus4T</a></h1>
-			<p>Just another free theme by 4Templates</p>
+			<h1><a href="#">JOBOFFERTHING</a></h1>
+			<p>SUBTITLE IF ANY</p>
 		</div>
 	</div>
 </div>
@@ -28,9 +37,9 @@
 	<div id="menu-content">
 		<ul id="menu">
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
-			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
-			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
-			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
+			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
+			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
+			<li><a href="Logout.php" accesskey="4" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">
@@ -56,7 +65,37 @@
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					
-					
+	<?php
+	$ora_acc = file_get_contents('oracle_acc.ini');
+	putenv('ORACLE_HOME=/oraclient');
+	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+		(ADDRESS_LIST =
+		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+		)
+		(CONNECT_DATA =
+		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+		)
+	  )');
+	?>
+	<?php
+	{
+    $sql1 = "SELECT a.applicants, a.date_applied FROM Applications a Where Employers = (SELECT email FROM Employers WHERE email = '".$_SESSION["Email"]."') ORDER BY a.jobnum";
+	    $stid=oci_parse($dbh, $sql1);
+	    oci_execute($stid, OCI_DEFAULT);
+	    while($row = oci_fetch_array($stid)) {
+	        echo <tr>;
+	        echo <td>;
+	        echo .$row[0].;
+	        echo </td>;
+	        echo <td>;
+	        echo .$row[1].;
+	        echo </td>;
+	        echo </tr>;
+	    }
+
+	}
+	?>
+
 				</div>
 			</div>
 		</div>

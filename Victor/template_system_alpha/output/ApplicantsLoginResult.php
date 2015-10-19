@@ -1,3 +1,11 @@
+<?php
+// Standard login required preamble
+// To use, place as the FIRST LINE of the page
+session_start();
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
+	header("Location: ApplicantsLogin.php");
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 	Maximus4T by 4Templates | http://www.4templates.com/free/ | @4templates
@@ -56,7 +64,11 @@
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					
-					
+<?php
+		echo "Welcome ".$_SESSION["Username"].", you are now logged in.";
+		
+?>
+
 				</div>
 			</div>
 		</div>

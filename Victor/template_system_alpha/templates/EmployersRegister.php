@@ -15,7 +15,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 ?>
 {%extends "base_employer.html" %}
 
-{% block content%}
+{% block content %}
 <table>
 <tr> <td column = '100'>
 <h1> Register as Employer</h1>

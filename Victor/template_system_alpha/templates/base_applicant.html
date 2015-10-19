@@ -53,10 +53,10 @@
 	<div class="content-bg">
 		<div id="content">
 			<div class="post">
-				<h1 class="ctitle"> </h2>
+				<h1 class="ctitle">{%block title%} {% endblock %}</h2>
 				<div class="entry">
-					
-					
+					{% block content%}
+					{% endblock%}
 				</div>
 			</div>
 		</div>
