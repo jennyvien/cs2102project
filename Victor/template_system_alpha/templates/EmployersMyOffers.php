@@ -6,6 +6,8 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
     header("Location: EmployersLogin.php");
 }
 ?>
+{% extends "base_applicant.html" %}
+{%block content%}
 <?php
 $sql = "SELECT * from JobOffers WHERE Employers = '".$_SESSION["Email"]."'";
 $stid=oci_parse($dbh, $sql);
@@ -46,7 +48,7 @@ while (($row = oci_fetch_array($stid)) != false){
   
     echo "<td style='text-align:right;'>";
     //MAKE THIS A LINK TO THE APPLICATION VIEW
-    echo "<a href ='#'><strong>Applicants: </strong> ".$app_count."</a>";
+    echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
     echo "</td>";
   echo "</tr>";
   echo "<tr>";
@@ -66,4 +68,4 @@ if ($flag = 0){
 <?php
 oci_close($dbh);
 ?>
-{% endblock %}
+{% endblock%}
