@@ -7,21 +7,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 }
 ?>
 <?php
-$ora_acc = file_get_contents('oracle_acc.ini');
-putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-    (ADDRESS_LIST =
-     (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-     (SERVICE_NAME = sid3.comp.nus.edu.sg)
-    )
-  )');
-?>
-{% extends "base_employer.html"%}
-
-{% block content %}
-<?php
 $sql = "SELECT * from JobOffers WHERE Employers = '".$_SESSION["Email"]."'";
 $stid=oci_parse($dbh, $sql);
 oci_execute($stid, OCI_DEFAULT);
@@ -31,7 +16,15 @@ oci_execute($stid, OCI_DEFAULT);
 $flag = 0;
 //echo var_dump(oci_fetch_array($stid));
 while (($row = oci_fetch_array($stid)) != false){
+  //show that at least one was found
   $flag = 1;
+  //collect applicants for current job
+  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
+  $app_stid = oci_parse($dbh, $app_sql);
+  oci_execute($app_stid);
+  $app_count = oci_fetch_all($app_stid, $res);
+
+  //output all data
   echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
   echo "<tr>";
     echo "<td>";
@@ -52,7 +45,8 @@ while (($row = oci_fetch_array($stid)) != false){
     echo "</td>";
   
     echo "<td style='text-align:right;'>";
-    echo "<a href ='#'><strong>Applicants: </strong> ". "0</a>";
+    //MAKE THIS A LINK TO THE APPLICATION VIEW
+    echo "<a href ='#'><strong>Applicants: </strong> ".$app_count."</a>";
     echo "</td>";
   echo "</tr>";
   echo "<tr>";
