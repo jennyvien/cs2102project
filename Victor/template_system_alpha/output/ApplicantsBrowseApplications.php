@@ -6,6 +6,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 	header("Location: ApplicantsLogin.php");
 }
 ?>
+
 <?php
 $ora_acc = file_get_contents('oracle_acc.ini');
 putenv('ORACLE_HOME=/oraclient');
@@ -76,7 +77,11 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 			<div class="post">
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
-					
+					<?php
+						$sql = "SELECT * FROM  Applications where applicants = '".$_SESSION["Email"]."";
+						$stid = oci_parse($dbh, $sql);
+						oci_execute($stid, OCI_DEFAULT);
+					?>					
 <table id="table">
 	<tr>
 		<th>Date Applied</th>
@@ -94,7 +99,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	
 	oci_free_statement($stid);
 	oci_close($dbh);
-?>
+?>	
 </table>
 
 				</div>
