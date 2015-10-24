@@ -78,28 +78,35 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					<?php
-						$sql = "SELECT * FROM  Applications where applicants = '".$_SESSION["Email"]."";
-						$stid = oci_parse($dbh, $sql);
-						oci_execute($stid, OCI_DEFAULT);
-					?>					
+					$sql="SELECT a.date_applied, j.title, e.company
+						FROM applications a, joboffers j, employers e
+						WHERE a.applicants = '" .$_SESSION["Email"]."'
+						and a.employers = e.email
+						and a.joboffers = j.jobnum";	
+					$stid=oci_parse($dbh, $sql);
+					oci_execute($stid, OCI_DEFAULT);
+					$result = oci_num_rows($stid);
+					if($result < 1) {
+						echo "No active applications to display.";
+					} else {
+				?>				
 <table id="table">
 	<tr>
 		<th>Date Applied</th>
 		<th>Position</th>
 		<th>Company</th>
 	</tr>
-<?php		
-	while($row = oci_fetch_array($stid)) {
+<?php
+	while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
 		echo "<tr>";
 		echo "<td>" .$row[0]. "</td>";
 		echo "<td>" .$row[1]. "</td>";
 		echo "<td>" .$row[2]. "</td>";
 		echo "</tr>";
-	}
-	
+	} }
 	oci_free_statement($stid);
 	oci_close($dbh);
-?>	
+?>
 </table>
 
 				</div>
