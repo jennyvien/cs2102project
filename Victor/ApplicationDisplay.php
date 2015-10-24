@@ -56,25 +56,28 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 						and a.joboffers = j.jobnum";	
 					$stid=oci_parse($dbh, $sql);
 					oci_execute($stid, OCI_DEFAULT);
+					$result = oci_num_rows($stid);
+					if($result < 1) {
+						echo "No active applications to display.";
+					} else {
 				?>	
-				<table id="table">
+					<table id="table">
 					<tr>
-						<th>Date Applied</th>
-						<th>Position</th>
-						<th>Company</th>
+					<th>Date Applied</th>
+					<th>Position</th>
+					<th>Company</th>
 					</tr>
-				<?php		
-					while($row = oci_fetch_array($stid)) {
-						echo "<tr>";
-						echo "<td>" .$row[0]. "</td>";
-						echo "<td>" .$row[1]. "</td>";
-						echo "<td>" .$row[2]. "</td>";
-						echo "</tr>";
-					}
-					
-					oci_free_statement($stid);
-					oci_close($dbh);
-				?>
+					<?php
+						while($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+							echo "<tr>";
+							echo "<td>" .$row[0]. "</td>";
+							echo "<td>" .$row[1]. "</td>";
+							echo "<td>" .$row[2]. "</td>";
+							echo "</tr>";
+						} }
+						oci_free_statement($stid);
+						oci_close($dbh);
+					?>
 				</table>
 				</div>
 			</div>	
