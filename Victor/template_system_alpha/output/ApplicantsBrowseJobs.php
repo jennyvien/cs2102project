@@ -97,8 +97,8 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	
 	while ($row = oci_fetch_array($stid)){
 		//Get company from employers
-		$sql1="SELECT * FROM employers e WHERE e.email='" .$row["EMPLOYERS"]. "'";
-		$stid1=oci_parse($dbh, $sql);
+		$sql1="SELECT company FROM employers e WHERE e.email='" .$row["EMPLOYERS"]. "'";
+		$stid1=oci_parse($dbh, $sql1);
 		oci_execute($stid1, OCI_DEFAULT);
 		$employerInfo = oci_fetch_array($stid1);
 		

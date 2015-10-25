@@ -1,23 +1,25 @@
 <?php
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
+
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Employer"] == 1){
+
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	header("Location: ApplicantsLogin.php");
 }
-?>
 
+?>
 <?php
-$ora_acc = file_get_contents('oracle_acc.ini');
-putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-	(ADDRESS_LIST =
-	 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-	)
-	(CONNECT_DATA =
-	 (SERVICE_NAME = sid3.comp.nus.edu.sg)
-	)
-  )');
+	$ora_acc = file_get_contents('oracle_acc.ini');
+	putenv('ORACLE_HOME=/oraclient');
+	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+		(ADDRESS_LIST =
+		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+		)
+		(CONNECT_DATA =
+		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+		)
+	  )');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
@@ -77,45 +79,22 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 			<div class="post">
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
-					<?php
-					$table = "<table id=" . "table" . ">"
-						. "<tr>" 
-						. " <th>Date Applied</th>" 
-						. "<th>Position</th>" 
-						. "<th>Company</th>" 
-						. "</tr>";
-				
-					$sql1 = "SELECT COUNT(*)
-							FROM applications
-							WHERE applicants = '" .$_SESSION["Email"]. "'";
 					
-					$sql2="SELECT a.date_applied, j.title, e.company
-						FROM applications a, joboffers j, employers e
-						WHERE a.applicants = '" .$_SESSION["Email"]. "'
-						and a.employers = e.email
-						and a.joboffers = j.jobnum";	
-					$stid1=oci_parse($dbh, $sql1);
-					oci_execute($stid1, OCI_DEFAULT);
-					$count = oci_fetch_array($stid1);
-					if($count[0] < 1) {
-						echo "No active applications to display.";
-					} else {
-						$stid2=oci_parse($dbh, $sql2);
-						oci_execute($stid2, OCI_DEFAULT);
-						echo $table;
-						while($row = oci_fetch_array($stid2, OCI_RETURN_NULLS)) {
-							echo "<tr>";
-							echo "<td>" .$row[0]. "</td>";
-							echo "<td>" .$row[1]. "</td>";
-							echo "<td>" .$row[2]. "</td>";
-							echo "</tr>";
-						}
-						oci_free_statement($stid2);
-					}
-					oci_free_statement($stid1);
-					oci_close($dbh);
-					echo "</table>";
-				?>
+<h1> Profile </h1> 
+<h6> <a href="ApplicantsDetailsEdit.php">Edit Profile </a></h6>
+<?php
+	$sql = "SELECT * FROM  applicants WHERE email='" .$_SESSION["Email"]. "'" ;
+	$stid = oci_parse($dbh, $sql);
+	oci_execute($stid, OCI_DEFAULT);
+	$userInfo = oci_fetch_array($stid);	
+	
+	echo "<br> Email: " . $userInfo["EMAIL"];	
+	echo "<br> Full Name: " . $userInfo["NAME"];	
+	echo "<br> Phone Number: " . $userInfo["PHONENUMBER"];	
+	echo "<br> Password: " . $userInfo["PASSWORD"];	
+	echo "<br> Resume: " . $userInfo["RESUME"];	
+?>
+
 				</div>
 			</div>
 		</div>
