@@ -50,7 +50,8 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
 			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
 			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
-			<li><a href="Logout.php" accesskey="4" title=""><span>Logout</span></a></li>
+			<li><a href="EmployersDetails.php" accesskey="4" title=""><span>Employer Details</span></a></li>
+			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">

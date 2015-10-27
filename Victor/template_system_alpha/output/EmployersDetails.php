@@ -1,10 +1,25 @@
 <?php
 // Standard login required preamble
 // To use, place as the FIRST LINE of the page
+
 session_start();
-if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Applicant"] == 1){
-    header("Location: EmployersLogin.php");
+
+if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
+	header("Location: EmployersLogin.php");
 }
+
+?>
+<?php
+	$ora_acc = file_get_contents('oracle_acc.ini');
+	putenv('ORACLE_HOME=/oraclient');
+	$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+		(ADDRESS_LIST =
+		 (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+		)
+		(CONNECT_DATA =
+		 (SERVICE_NAME = sid3.comp.nus.edu.sg)
+		)
+	  )');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
@@ -36,9 +51,9 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 	<div id="menu-content">
 		<ul id="menu">
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
-			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
-			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
-			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
+			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
+			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
+			<li><a href="EmployersDetails.php" accesskey="4" title=""><span>Employer Details</span></a></li>
 			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
@@ -65,65 +80,20 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					
+<h1> Profile </h1> 
+<h6> <a href="EmployersUpdateProfile.php">Edit Profile </a></h6>
 <?php
-$sql = "SELECT * from JobOffers WHERE Employers = '".$_SESSION["Email"]."'";
-$stid=oci_parse($dbh, $sql);
-oci_execute($stid, OCI_DEFAULT);
-//catch null values here
-
-//Iterate through the whole table, print needed data
-$flag = 0;
-//echo var_dump(oci_fetch_array($stid));
-while (($row = oci_fetch_array($stid)) != false){
-  //show that at least one was found
-  $flag = 1;
-  //collect applicants for current job
-  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
-  $app_stid = oci_parse($dbh, $app_sql);
-  oci_execute($app_stid);
-  $app_count = oci_fetch_all($app_stid, $res);
-
-  //output all data
-  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
-  echo "<tr>";
-    echo "<td>";
-      echo "<strong>Title: </strong> ";
-      echo $row["TITLE"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>Location: </strong> ";
-      echo $row["CITY"].", ".$row["COUNTRY"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>Position: </strong> ";
-      echo $row["POS_TYPE"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>SALARY: </strong> ";
-      echo "$".$row["SALARY"];
-    echo "</td>";
-  
-    echo "<td style='text-align:right;'>";
-    //MAKE THIS A LINK TO THE APPLICATION VIEW
-    echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
-    echo "</td>";
-  echo "</tr>";
-  echo "<tr>";
-    echo "<td colspan = '4'>";
-      echo "<strong>Description: </strong><br>\n ";
-      echo $row["DESCRIPTION"];
-    echo "</td>";
-  echo "</tr>";
-  echo "</table>";
-  echo "<br>";
-}
-if ($flag = 0){
-  echo "<p>You have not submitted any offers.</p>";
-}
-?>
-
-<?php
-oci_close($dbh);
+	$sql = "SELECT * FROM  employers WHERE email='" .$_SESSION["Email"]. "'" ;
+	$stid = oci_parse($dbh, $sql);
+	oci_execute($stid, OCI_DEFAULT);
+	$userInfo = oci_fetch_array($stid);	
+	
+	echo "<br> Email: " . $userInfo["EMAIL"];
+	echo "<br> Company: " . $userInfo["COMPANY"];
+	echo "<br> First Name: " . $userInfo["FIRST_NAME"];	
+	echo "<br> Last Name: " . $userInfo["LAST_NAME"];	
+	echo "<br> Phone Number: " . $userInfo["PHONENUMBER"];	
+	echo "<br> Password: " . $userInfo["PASSWORD"];		
 ?>
 
 				</div>
