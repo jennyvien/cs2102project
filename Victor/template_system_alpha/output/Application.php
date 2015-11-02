@@ -102,7 +102,6 @@ if(isset($_POST['formSubmit']))
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
 
-	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicantsBrowseJobs.php\">";	
 }
 ?>
 <?php
@@ -133,6 +132,7 @@ if(isset($_POST['Submit']))
 	}
 	oci_free_statement($stid);
 	oci_close($dbh);
+	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicantsBrowseJobs.php\">";	
 }
 ?>
 
@@ -142,28 +142,7 @@ if(isset($_POST['Submit']))
 	</div>
 	<div class="bgbtm"></div>
 </div>
-<div id="footer-content">
-	<div class="bgtop"></div>
-	<div class="content-bg">
-		<div id="column1">
-			<div class="box1">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-			<div class="box2">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-		<div id="column2">
-			<div class="box3">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-	</div>
-	<div class="bgbtm"></div>
-</div>
+
 <div id="footer">
 	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
 </div>
