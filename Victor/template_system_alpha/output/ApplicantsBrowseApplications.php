@@ -48,7 +48,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 <div id="menu-wrapper">
 	<div id="menu-content">
 		<ul id="menu">
-			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
+			<li class="first"><a href="ApplicantsPortal.php" accesskey="1" title=""><span>Home</span></a></li>
 			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
 			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
 			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
@@ -85,7 +85,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 							Employers='" . $_POST['Employers'] . "' AND
 							Joboffers='" . $_POST['Joboffers'] . "'";
 						$stid_del=oci_parse($dbh, $sql_del);
-						oci_execute($stid_del, OCI_DEFAULT);
+						oci_execute($stid_del);
 						oci_free_statement($stid_del);
 					}
 					?>

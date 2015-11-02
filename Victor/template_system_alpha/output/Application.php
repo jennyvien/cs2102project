@@ -46,7 +46,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 <div id="menu-wrapper">
 	<div id="menu-content">
 		<ul id="menu">
-			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
+			<li class="first"><a href="ApplicantsPortal.php" accesskey="1" title=""><span>Home</span></a></li>
 			<li><a href="ApplicantsBrowseApplications.php" accesskey="2" title=""><span>My applications</span></a></li>
 			<li><a href="ApplicantsBrowseJobs.php" accesskey="3" title=""><span>Browse Offers</span></a></li>
 			<li><a href="ApplicantsDetails.php" accesskey="4" title=""><span>Applicant Details</span></a></li>
