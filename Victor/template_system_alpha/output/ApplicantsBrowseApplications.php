@@ -78,6 +78,19 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					<?php
+					//Delete offers if delete request is present
+					if (array_key_exists('Delete' ,$_POST)){
+						$sql_del = "DELETE FROM Applications
+							WHERE Applicants='" . $_POST['Applicants'] . "' AND
+							Employers='" . $_POST['Employers'] . "' AND
+							Joboffers='" . $_POST['Joboffers'] . "'";
+						$stid_del=oci_parse($dbh, $sql_del);
+						oci_execute($stid_del, OCI_DEFAULT);
+						oci_free_statement($stid_del);
+					}
+					?>
+
+					<?php
 					$table = "<table id=" . "table" . ">"
 						. "<tr>" 
 						. " <th>Date Applied</th>" 
@@ -89,7 +102,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 							FROM applications
 							WHERE applicants = '" .$_SESSION["Email"]. "'";
 					
-					$sql2="SELECT a.date_applied, j.title, e.company
+					$sql2="SELECT a.date_applied, j.title, e.company, a.applicants, a.Employers, a.JobOffers
 						FROM applications a, joboffers j, employers e
 						WHERE a.applicants = '" .$_SESSION["Email"]. "'
 						and a.employers = e.email
@@ -108,6 +121,14 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 							echo "<td>" .$row[0]. "</td>";
 							echo "<td>" .$row[1]. "</td>";
 							echo "<td>" .$row[2]. "</td>";
+							echo "<td>" . "
+							<form action='ApplicantsBrowseApplications.php' method='POST'>
+							<input type='hidden' name='Applicants' value='" . $row[3] . "'>
+							<input type='hidden' name='Employers' value='" . $row[4] . "'>
+							<input type='hidden' name='Joboffers' value='" . $row[5] . "'>
+							<input type='submit' name='Delete' value='Delete'>
+							</form>
+							";
 							echo "</tr>";
 						}
 						oci_free_statement($stid2);
