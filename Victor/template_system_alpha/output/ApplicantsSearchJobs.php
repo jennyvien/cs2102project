@@ -41,7 +41,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Employment made easy</p>
+			<p>Subtitle</p>
 		</div>
 	</div>
 </div>
@@ -86,23 +86,85 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 
 <?php
 if(isset($_GET['submit']))
-{
-	$sql = "SELECT title, description FROM JobOffers WHERE title = '".$_GET['searchContent']."'OR description = '".$_POST['searchContent']."'"; 
-	$stid = oci_parse($dbh, $sql);
-	oci_execute($stid,OCI_DEFAULT);
-	$result = oci_num_rows($sql);
-	if($result<1){
-		echo "No result founded.";
-	}
-	while($row = oci_fetch_array($stid)) {
-		echo "<tr>";
-		echo "<td>";
-		echo $row[0];
-		echo "</td>";
-		echo "</tr>";
-	}	
+{	
+	$sql = "SELECT *
+			FROM JobOffers WHERE title = '"
+			.$_GET['searchContent'].
+			 "'OR employers LIKE'"
+			.$_GET['searchContent'].
+			 "'OR keywords LIKE'"
+			.$_GET['searchContent'].
+			 "'OR description LIKE'"
+			.$_GET['searchContent'].
+			 "'OR city LIKE'"
+			.$_GET['searchContent'].
+			 "'OR country LIKE'"
+			.$_GET['searchContent'].
+			 "'OR area_code LIKE'"
+			.$_GET['searchContent'].
+			 "'OR pos_type LIKE'"
+			.$_GET['searchContent'].
+			 "'OR salary LIKE'"
+			.$_GET['searchContent']."'";
+			 
+			
+	$stid=oci_parse($dbh, $sql);
+	oci_execute($stid, OCI_DEFAULT);
+
+$flag = 0;
+	
+while (($row = oci_fetch_array($stid)) != false){
+  //show that at least one was found
+  $flag = 1;
+  //collect applicants for current job
+  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
+  $app_stid = oci_parse($dbh, $app_sql);
+  oci_execute($app_stid);
+  $app_count = oci_fetch_all($app_stid, $res);
+
+  //output all data
+  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
+  echo "<tr>";
+    echo "<td>";
+      echo "<strong>Title: </strong> ";
+      echo $row["TITLE"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>Location: </strong> ";
+      echo $row["CITY"].", ".$row["COUNTRY"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>Position: </strong> ";
+      echo $row["POS_TYPE"];
+    echo "</td>";
+    echo "<td>";
+      echo "<strong>SALARY: </strong> ";
+      echo "$".$row["SALARY"];
+    echo "</td>";
+  
+    echo "<td style='text-align:right;'>";
+    
+    //MAKE THIS A LINK TO THE APPLICATION VIEW
+    echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
+    echo "</td>";
+  echo "</tr>";
+  echo "<tr>";
+    echo "<td colspan = '4'>";
+      echo "<strong>Description: </strong><br>\n ";
+      echo $row["DESCRIPTION"];
+    echo "</td>";
+  echo "</tr>";
+  echo "</table>";
+  echo "<br>";
+}
+if ($flag = 0){
+  echo "<p> No result was found.</p>";
+}
+
 }
 ?>
+
+
 <?php
 oci_close($dbh);
 ?>
@@ -113,6 +175,30 @@ oci_close($dbh);
 	</div>
 	<div class="bgbtm"></div>
 </div>
-
+<div id="footer-content">
+	<div class="bgtop"></div>
+	<div class="content-bg">
+		<div id="column1">
+			<div class="box1">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+			<div class="box2">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+		<div id="column2">
+			<div class="box3">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+	</div>
+	<div class="bgbtm"></div>
+</div>
+<div id="footer">
+	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
+</div>
 </body>
 </html>

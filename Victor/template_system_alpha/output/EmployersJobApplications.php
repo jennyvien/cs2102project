@@ -6,18 +6,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
     header("Location: EmployersLogin.php");
 }
 ?>
-<?php
-$ora_acc = file_get_contents('oracle_acc.ini');
-putenv('ORACLE_HOME=/oraclient');
-$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
-  (ADDRESS_LIST =
-   (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
-  )
-  (CONNECT_DATA =
-   (SERVICE_NAME = sid3.comp.nus.edu.sg)
-  )
-  )');
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 	Maximus4T by 4Templates | http://www.4templates.com/free/ | @4templates
@@ -40,7 +29,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Employment made easy</p>
+			<p>Subtitle</p>
 		</div>
 	</div>
 </div>
@@ -50,7 +39,8 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
 			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
 			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
-			<li><a href="Logout.php" accesskey="4" title=""><span>Logout</span></a></li>
+			<li><a href="EmployersDetails.php" accesskey="4" title=""><span>Employer Details</span></a></li>
+			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">
@@ -77,48 +67,11 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				<div class="entry">
 					
 <?php
-  $sql = "SELECT * from Applications WHERE JobOffers = ".$_GET["job"];
-  $stid = oci_parse($dbh, $sql);
-  oci_execute($stid);
-  $flag = 0;
-  while (($row = oci_fetch_array($stid)) != false){
-    $flag = 1;
-    //Query for applicant name
-    $app_sql = "SELECT name from Applicants WHERE email = '".$row["APPLICANTS"]."'";
-    $app_stid = oci_parse($dbh, $app_sql);
-    oci_execute($app_stid);
-    $app_name = oci_fetch_array($app_stid)["NAME"];
-
-
-    //output all data
-    echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
-    echo "<tr>";
-      echo "<td>";
-        echo "<strong>Name: </strong> ";
-        echo $app_name;
-      echo "</td>";
-      echo "<td>";
-        echo "<strong>Email: </strong> ";
-        echo $row["APPLICANTS"];
-      echo "</td>";
-      echo "<td>";
-        echo "<strong>Date of Application: </strong> ";
-        echo $row["DATE_APPLIED"];
-      echo "</td>";
-    echo "</tr>";
-    echo "<tr>";
-      echo "<td colspan = '3'>";
-        echo "<strong>Writeup: </strong><br>\n ";
-        echo $row["WRITEUP"];
-      echo "</td>";
-    echo "</tr>";
-    echo "</table>";
-    echo "<br>";
-  }
-  //If no applicants
-  if ($flag == 0){
-    echo "<p>There are no applicants for this job.</p>";
-  }
+  echo var_dump($_GET);
+  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
+  $app_stid = oci_parse($dbh, $app_sql);
+  oci_execute($app_stid);
+  $app_count = oci_fetch_all($app_stid, $res);
 ?>
 
 <?php
@@ -131,6 +84,30 @@ oci_close($dbh);
 	</div>
 	<div class="bgbtm"></div>
 </div>
-
+<div id="footer-content">
+	<div class="bgtop"></div>
+	<div class="content-bg">
+		<div id="column1">
+			<div class="box1">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+			<div class="box2">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+		<div id="column2">
+			<div class="box3">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+	</div>
+	<div class="bgbtm"></div>
+</div>
+<div id="footer">
+	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
+</div>
 </body>
 </html>

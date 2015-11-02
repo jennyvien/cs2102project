@@ -6,6 +6,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Em
 	header("Location: ApplicantsLogin.php");
 }
 ?>
+
 <?php
 $ora_acc = file_get_contents('oracle_acc.ini');
 putenv('ORACLE_HOME=/oraclient');
@@ -40,7 +41,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Employment made easy</p>
+			<p>Subtitle</p>
 		</div>
 	</div>
 </div>
@@ -76,33 +77,75 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 			<div class="post">
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
+					<?php
+					$table = "<table id=" . "table" . ">"
+						. "<tr>" 
+						. " <th>Date Applied</th>" 
+						. "<th>Position</th>" 
+						. "<th>Company</th>" 
+						. "</tr>";
+				
+					$sql1 = "SELECT COUNT(*)
+							FROM applications
+							WHERE applicants = '" .$_SESSION["Email"]. "'";
 					
-<table id="table">
-	<tr>
-		<th>Date Applied</th>
-		<th>Position</th>
-		<th>Company</th>
-	</tr>
-<?php		
-	while($row = oci_fetch_array($stid)) {
-		echo "<tr>";
-		echo "<td>" .$row[0]. "</td>";
-		echo "<td>" .$row[1]. "</td>";
-		echo "<td>" .$row[2]. "</td>";
-		echo "</tr>";
-	}
-	
-	oci_free_statement($stid);
-	oci_close($dbh);
-?>
-</table>
-
+					$sql2="SELECT a.date_applied, j.title, e.company
+						FROM applications a, joboffers j, employers e
+						WHERE a.applicants = '" .$_SESSION["Email"]. "'
+						and a.employers = e.email
+						and a.joboffers = j.jobnum";	
+					$stid1=oci_parse($dbh, $sql1);
+					oci_execute($stid1, OCI_DEFAULT);
+					$count = oci_fetch_array($stid1);
+					if($count[0] < 1) {
+						echo "No active applications to display.";
+					} else {
+						$stid2=oci_parse($dbh, $sql2);
+						oci_execute($stid2, OCI_DEFAULT);
+						echo $table;
+						while($row = oci_fetch_array($stid2, OCI_RETURN_NULLS)) {
+							echo "<tr>";
+							echo "<td>" .$row[0]. "</td>";
+							echo "<td>" .$row[1]. "</td>";
+							echo "<td>" .$row[2]. "</td>";
+							echo "</tr>";
+						}
+						oci_free_statement($stid2);
+					}
+					oci_free_statement($stid1);
+					oci_close($dbh);
+					echo "</table>";
+				?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="bgbtm"></div>
 </div>
-
+<div id="footer-content">
+	<div class="bgtop"></div>
+	<div class="content-bg">
+		<div id="column1">
+			<div class="box1">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+			<div class="box2">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+		<div id="column2">
+			<div class="box3">
+				<h2>Just another widget</h2>
+				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
+			</div>
+		</div>
+	</div>
+	<div class="bgbtm"></div>
+</div>
+<div id="footer">
+	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
+</div>
 </body>
 </html>
