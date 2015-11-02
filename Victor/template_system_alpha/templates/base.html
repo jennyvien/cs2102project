@@ -37,23 +37,10 @@
 	<div class="content-bg">
 		<div id="content">
 			<div class="post">
-				<h1 class="ctitle"> </h2>
+				<h1 class="ctitle">{%block title%} {% endblock %}</h2>
 				<div class="entry">
-					
-<table>
-<tr>
-	<td align="center" onclick="location.href='ApplicantsLogin.php';"><button type="button" class="btn btn-default">Applicant Login</button></td>
-	<td width="50%"></td>
-	<td align="center" onclick="location.href='EmployersLogin.php';"><button type="button" class="btn btn-default">Employer Login</button></td>
-</tr>
-<tr>
-	<td align="center" onclick="location.href='ApplicantsRegister.php';"><button type="button" class="btn btn-default">Applicant Registration</button></td>
-	<td width="50%"></td>
-	<td align="center" onclick="location.href='EmployersRegister.php';"><button type="button" class="btn btn-default">Employer Registration</button></td>
-</tr>
-</table>
-
-
+					{% block content%}
+					{% endblock%}
 				</div>
 			</div>
 		</div>

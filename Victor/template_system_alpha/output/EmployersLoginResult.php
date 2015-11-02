@@ -28,7 +28,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Subtitle</p>
+			<p>Employment made easy</p>
 		</div>
 	</div>
 </div>
@@ -38,8 +38,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 			<li class="first"><a href="#" accesskey="1" title=""><span>Home</span></a></li>
 			<li><a href="EmployersViewOffers.php" accesskey="2" title=""><span>My Offers</span></a></li>
 			<li><a href="EmployersSubmitOffer.php" accesskey="3" title=""><span>Submit Job Offer</span></a></li>
-			<li><a href="EmployersDetails.php" accesskey="4" title=""><span>Employer Details</span></a></li>
-			<li><a href="Logout.php" accesskey="5" title=""><span>Logout</span></a></li>
+			<li><a href="Logout.php" accesskey="4" title=""><span>Logout</span></a></li>
 		</ul>
 	</div>
 	<div id="search">
@@ -76,30 +75,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 	</div>
 	<div class="bgbtm"></div>
 </div>
-<div id="footer-content">
-	<div class="bgtop"></div>
-	<div class="content-bg">
-		<div id="column1">
-			<div class="box1">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-			<div class="box2">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-		<div id="column2">
-			<div class="box3">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-	</div>
-	<div class="bgbtm"></div>
-</div>
-<div id="footer">
-	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
-</div>
+
 </body>
 </html>
