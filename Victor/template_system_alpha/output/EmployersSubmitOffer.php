@@ -96,13 +96,12 @@ if(isset($_GET['jobSubmit']))
     //GET THE JOBNUMBER FIRST
     //$jobnum_sql = "SELECT (*) from Joboffers";
     //replace with this when tables are remade to integer
-    $jobnum_sql = "SELECT max(jobnum) from Joboffers";
+    $jobnum_sql = "SELECT count(jobnum) from Joboffers";
     $jobnum_stid = oci_parse($dbh, $jobnum_sql);
     oci_execute($jobnum_stid, OCI_COMMIT_ON_SUCCESS);
     $jobnumrow = oci_fetch($jobnum_stid);
     $j=1+$jobnumrow;
     oci_free_statement($jobnum_stid);
-
 
   //  $sql2 = "Insert into JobOffers Values (:jobnum, ':employers', ':title', ':keywords', ':description', ':city', ':country', :area_code, ':pos_type,' :salary)";
   //  oci_bind_by_name($stid, ":jobnum", $jobnumrow[0]);
@@ -115,10 +114,12 @@ if(isset($_GET['jobSubmit']))
   //  oci_bind_by_name($stid, ":area_code", $_GET["area_code"]);
   //  oci_bind_by_name($stid, ":pos_type", $_GET["pos_type"]);
  //   oci_bind_by_name($stid, ":salary", $_GET["salary"]);
+
     $sql2 = "Insert into JobOffers Values (".($j).",'".$_SESSION['Email']."','".$_GET['title']."','".$_GET['keywords']."','".$_GET['description']."','".$_GET['city']."','".$_GET['country']."','".$_GET['area_code']."','".$_GET['pos_type']."','".$_GET['salary']."')";
     $stid = oci_parse($dbh, $sql2);
     oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
     oci_free_statement($stid);
+
 
 }
 ?>
