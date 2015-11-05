@@ -6,7 +6,18 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
     header("Location: EmployersLogin.php");
 }
 ?>
-
+<?php
+$ora_acc = file_get_contents('oracle_acc.ini');
+putenv('ORACLE_HOME=/oraclient');
+$dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = sid3.comp.nus.edu.sg)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+     (SERVICE_NAME = sid3.comp.nus.edu.sg)
+    )
+  )');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 	Maximus4T by 4Templates | http://www.4templates.com/free/ | @4templates
@@ -65,18 +76,76 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0 or $_SESSION["Ap
 			<div class="post">
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
-					
-<?php
-  echo var_dump($_GET);
-  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
-  $app_stid = oci_parse($dbh, $app_sql);
-  oci_execute($app_stid);
-  $app_count = oci_fetch_all($app_stid, $res);
-?>
 
+<h1> Applications </h1>
+
+<form method="POST">					
 <?php
-oci_close($dbh);
+	$jobNum = $_SESSION['jobNum'];
+	
+  	$sql = "SELECT * from Applications WHERE JobOffers = '" .$jobNum. "'" ;
+  	
+  
+	
+	
+function customError($errno, $errstr) {
+
+  echo "<b>Error:</b> [$errno] $errstr<br>";
+  echo "Ending Script";
+  die();
+}
+
+//set error handler
+set_error_handler("customError",E_USER_WARNING);
+
+
+$stid=oci_parse($dbh, $sql);
+
+if (is_null($stid)) {
+
+  trigger_error("<strong>No application founded!</strong>",E_USER_WARNING);
+}
+
+oci_execute($stid, OCI_DEFAULT);
+
+
+
+$flag = 0;
+//echo var_dump(oci_fetch_array($stid));
+while (($row = oci_fetch_array($stid)) != false){
+  //show that at least one was found
+  $flag = 1;
+
+  //output all data
+  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
+  echo "<tr>";
+  
+    echo "<td>";
+      echo "<strong>Applicant: </strong> ";
+      echo $row["APPLICANTS"];
+    echo "</td>";
+    
+    echo "<td>";
+      echo "<strong>Apply Date: </strong> ";
+      echo $row["DATE_APPLIED"];
+    echo "</td>";
+    
+    echo "</tr>";
+  echo "<tr>";
+    echo "<td colspan = '4'>";
+      echo "<strong>Write up: </strong><br>\n ";
+      echo $row["WRITEUP"];
+    echo "</td>";
+    
+  echo "</tr>";
+  
+  echo "</table>";
+  echo "<br>";
+}
+
+	
 ?>
+</form>
 
 				</div>
 			</div>

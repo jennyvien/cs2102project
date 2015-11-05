@@ -123,8 +123,11 @@ while (($row = oci_fetch_array($stid)) != false){
     $_SESSION['jobNum'] = $row["JOBNUM"];
     
     //MAKE THIS A LINK TO THE APPLICATION VIEW
-    echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
+    echo "<a href ='EmployersJobApplications.php'> Applicants: </strong> ".$app_count."</a>";
     echo "</td>";
+    
+    // Delete
+    
     
   echo "</tr>";
   echo "<tr>";
