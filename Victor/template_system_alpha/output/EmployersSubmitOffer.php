@@ -96,11 +96,17 @@ if(isset($_GET['jobSubmit']))
     //GET THE JOBNUMBER FIRST
     //$jobnum_sql = "SELECT (*) from Joboffers";
     //replace with this when tables are remade to integer
-    $jobnum_sql = "SELECT count(jobnum) from Joboffers";
+    $jobnum_sql = "SELECT max(jobnum) from Joboffers where employers='".$_SESSION["Email"]."'";
     $jobnum_stid = oci_parse($dbh, $jobnum_sql);
     oci_execute($jobnum_stid, OCI_COMMIT_ON_SUCCESS);
-    $jobnumrow = oci_fetch($jobnum_stid);
-    $j=1+$jobnumrow;
+    $result=oci_fetch($jobnum_stid);
+    if($result){
+    	$jobnumrow = oci_result($jobnum_stid, 'MAX(JOBNUM)');
+   		$j=1+$jobnumrow;
+    }else{
+    	$j=1;
+    }
+    
     oci_free_statement($jobnum_stid);
 
   //  $sql2 = "Insert into JobOffers Values (:jobnum, ':employers', ':title', ':keywords', ':description', ':city', ':country', :area_code, ':pos_type,' :salary)";
