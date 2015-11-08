@@ -43,7 +43,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Subtitle</p>
+			<p>Employment made easy</p>
 		</div>
 	</div>
 </div>
@@ -125,32 +125,7 @@ if(isset($_POST['formSubmit']))
 			</div>
 		</div>
 	</div>
-	<div class="bgbtm"></div>
-</div>
-<div id="footer-content">
-	<div class="bgtop"></div>
-	<div class="content-bg">
-		<div id="column1">
-			<div class="box1">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-			<div class="box2">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-		<div id="column2">
-			<div class="box3">
-				<h2>Just another widget</h2>
-				<p>Mauris consectetur magna tempus enim sagittis et bibendum lacus et imperdiet. Maecenas semper et massa amet et odio mauris dui, id luctus amet ligula.</p>
-			</div>
-		</div>
-	</div>
-	<div class="bgbtm"></div>
-</div>
-<div id="footer">
-	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
+	<div class="bgbtm">
 </div>
 </body>
 </html>

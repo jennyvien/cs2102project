@@ -39,7 +39,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 	<div id="header">
 		<div id="logo">
 			<h1><a href="homepage.html">JobHunt</a></h1>
-			<p>Subtitle</p>
+			<p>Employment made easy</p>
 		</div>
 	</div>
 </div>
@@ -138,7 +138,6 @@ if(isset($_POST['Submit']))
 	</div>
 	<div class="bgbtm"></div>
 </div>
-
 <div id="footer">
 	<p><a href="http://www.4templates.com/free/">4Templates</a>  |  Photos by <a href="http://fotogrph.com/">Fotogrph</a></p>
 </div>
