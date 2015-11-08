@@ -85,7 +85,7 @@ if(isset($_POST['Submission']))
 	$stid = oci_parse($dbh, $sql);
 	oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
 	oci_free_statement($stid);
-	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicantsPortal\">";	
+	echo "<meta http-equiv=\"refresh\" content=\"0;ApplicantsPortal.php\">";	
 }
 ?>
 <?php

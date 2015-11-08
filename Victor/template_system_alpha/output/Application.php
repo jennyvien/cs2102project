@@ -83,7 +83,6 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 </table>
 
 <form method="POST">
-
 	Write Up:<br>	
 	<textarea rows="4" cols="50" name="WriteUp" id="WriteUp">Write up..</textarea><br>
 	<input type="submit" name="formSubmit" value="Submit">
@@ -93,9 +92,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 <?php
 if(isset($_POST['formSubmit']))
 {
-	$jobnum = $_GET['jobnum'];
 	date_default_timezone_set('UTC');
-
 
 	$sql = "Insert into Applications values('".$_SESSION['Email']."',sysdate,'".$_POST['WriteUp']."','".$_GET['employer']."', '".$_GET['jobnum']."')";
 	$stid= oci_parse($dbh, $sql);
@@ -126,8 +123,7 @@ if(isset($_POST['Submit']))
 		$_SESSION["Username"] = $data["NAME"];
 		$_SESSION["Email"] = $data["EMAIL"];
 		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=ApplicantsLoginResult.php">';
-	}
-	else{
+	} else {
 		$_SESSION["Failed"] = 1;
 	}
 	oci_free_statement($stid);

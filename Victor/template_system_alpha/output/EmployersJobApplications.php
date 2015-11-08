@@ -81,14 +81,16 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				
 <?php
 	$jobNum = $_GET['job'];
+	$employer = $_GET['employer'];
   	$sql1 = "SELECT COUNT(*) 
 			FROM Applications 
-			WHERE JobOffers = '" .$jobNum. "'" ;
+			WHERE JobOffers = '" .$jobNum. "'
+			AND Employers = '" .$employer. "'" ;
 			
 	$sql2 = "SELECT * 
 			From Applications 
-			WHERE JobOffers = '" .$jobNum. "'" ;
-			
+			WHERE JobOffers = '" .$jobNum. "'
+			AND Employers = '" .$employer. "'" ;
   	$stid1 = oci_parse($dbh, $sql1);
 	oci_execute($stid1, OCI_DEFAULT);
 	$count = oci_fetch_array($stid1);
