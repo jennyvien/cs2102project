@@ -77,25 +77,31 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				<h1 class="ctitle"> </h2>
 				<div class="entry">
 					
-<form>
-    Title of the job:<input type="text" name="title" id="title"><br><br>
-    Some keywords about this job:<input type="text" name="keywords" id="keywords"><br><br>
-    City:<input type="text" name="city" id="city"><br><br>
-    Country:<input type="text" name="country" id="country"><br><br>
-    Area Code:<input type="number" name="area_code" id="area_code"><br><br>
-    Part Time or Full Time:<input type="text" name="pos_type" id="pos_type"><br><br> <!--Maybe change into choices later?-->
-    Salary:<input type="number" name="salary" id="salary"><br><br>
-    Job Description:<br>
-				<textarea rows="50" cols="50" name="description" id="description">Describe the job in 250 words... </textarea><br>
+<form method="POST">
+    Title of the job:
+	<input type="text" name="title" id="title"><br><br>
+    Some keywords about this job:
+	<input type="text" name="keywords" id="keywords"><br><br>
+    City:
+	<input type="text" name="city" id="city"><br><br>
+    Country:
+	<input type="text" name="country" id="country"><br><br>
+    Area Code:
+	<input type="number" name="area_code" id="area_code"><br><br>
+    Part Time or Full Time:
+	<input type="text" name="pos_type" id="pos_type"><br><br> <!--Maybe change into choices later?-->
+    Salary:
+	<input type="number" name="salary" id="salary"><br><br>
+    Job Description:
+	<br>
+	<textarea rows="20" cols="50" name="description" id="description">Describe the job in 250 words... </textarea>
+	<br>
     <input type="submit" name="jobSubmit" value="Submit">
 </form>
 <?php
-if(isset($_GET['jobSubmit']))
-{
-    
+if(isset($_POST['jobSubmit']))
+{   
     //GET THE JOBNUMBER FIRST
-    //$jobnum_sql = "SELECT (*) from Joboffers";
-    //replace with this when tables are remade to integer
     $jobnum_sql = "SELECT max(jobnum) from Joboffers where employers='".$_SESSION["Email"]."'";
     $jobnum_stid = oci_parse($dbh, $jobnum_sql);
     oci_execute($jobnum_stid, OCI_COMMIT_ON_SUCCESS);
@@ -106,25 +112,23 @@ if(isset($_GET['jobSubmit']))
     }else{
     	$j=1;
     }
-    
     oci_free_statement($jobnum_stid);
-
-  //  $sql2 = "Insert into JobOffers Values (:jobnum, ':employers', ':title', ':keywords', ':description', ':city', ':country', :area_code, ':pos_type,' :salary)";
-  //  oci_bind_by_name($stid, ":jobnum", $jobnumrow[0]);
-  //  oci_bind_by_name($stid, ":employers", $_SESSION["Email"]);
-  //  oci_bind_by_name($stid, ":title", $_GET["title"]);
-  // oci_bind_by_name($stid, ":keywords", $_GET["keywords"]);
-   // oci_bind_by_name($stid, ":description", $_GET["description"]);
-  //  oci_bind_by_name($stid, ":city", $_GET["city"]);
-  // oci_bind_by_name($stid, ":country", $_GET["country"]);
-  //  oci_bind_by_name($stid, ":area_code", $_GET["area_code"]);
-  //  oci_bind_by_name($stid, ":pos_type", $_GET["pos_type"]);
- //   oci_bind_by_name($stid, ":salary", $_GET["salary"]);
-
-    $sql2 = "Insert into JobOffers Values (".($j).",'".$_SESSION['Email']."','".$_GET['title']."','".$_GET['keywords']."','".$_GET['description']."','".$_GET['city']."','".$_GET['country']."','".$_GET['area_code']."','".$_GET['pos_type']."','".$_GET['salary']."')";
+   $sql2 = "insert into jobOffers values (
+	". $j .
+	",'" . $_SESSION['Email'] .
+	"','" . $_POST['title'] .
+	"','" . $_POST['keywords'] .
+	"','" . $_POST['description'] .
+	"','" . $_POST['city'] .
+	"','" . $_POST['country'] .
+	"'," . $_POST['area_code'] .
+	",'" . $_POST['pos_type'] .
+	"'," . $_POST['salary'] . ")";
     $stid = oci_parse($dbh, $sql2);
-    oci_execute($stid,OCI_COMMIT_ON_SUCCESS);
+    oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
     oci_free_statement($stid);
+	
+	echo '<META HTTP-EQUIV="Refresh" Content="0; URL=EmployersViewOffers.php">';
 
 
 }

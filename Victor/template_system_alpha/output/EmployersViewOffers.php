@@ -75,78 +75,87 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 		<div id="content">
 			<div class="post">
 				<h1 class="ctitle"> </h2>
-				<div class="entry">
-					
+				<div class="entry">								
 <?php
-$sql = "SELECT * from JobOffers WHERE Employers = '".$_SESSION["Email"]."'";
-$stid=oci_parse($dbh, $sql);
-oci_execute($stid, OCI_DEFAULT);
-//catch null values here
-
-//Iterate through the whole table, print needed data
-$flag = 0;
-//echo var_dump(oci_fetch_array($stid));
-while (($row = oci_fetch_array($stid)) != false){
-  //show that at least one was found
-  $flag = 1;
-  //collect applicants for current job
-  $app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
-  $app_stid = oci_parse($dbh, $app_sql);
-  oci_execute($app_stid);
-  $app_count = oci_fetch_all($app_stid, $res);
-
-  //output all data
-  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
-  echo "<tr>";
-    echo "<td>";
-      echo "<strong>Title: </strong> ";
-      echo $row["TITLE"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>Location: </strong> ";
-      echo $row["CITY"].", ".$row["COUNTRY"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>Position: </strong> ";
-      echo $row["POS_TYPE"];
-    echo "</td>";
-    echo "<td>";
-      echo "<strong>SALARY: </strong> ";
-      echo "$".$row["SALARY"];
-    echo "</td>";
-  
-    echo "<td style='text-align:right;'>";
-    
-    // Edit this application
-   	echo "<a href= 'EmployersUpdateOffers.php' > Edit</a>";
-    echo "</td>";
-    $_SESSION['jobNum'] = $row["JOBNUM"];
-    
-    //MAKE THIS A LINK TO THE APPLICATION VIEW
-    echo "<a href ='EmployersJobApplications.php'> Applicants: </strong> ".$app_count."</a>";
-    echo "</td>";
-    
-    // Delete
-    
-    
-  echo "</tr>";
-  echo "<tr>";
-    echo "<td colspan = '4'>";
-      echo "<strong>Description: </strong><br>\n ";
-      echo $row["DESCRIPTION"];
-    echo "</td>";
-  echo "</tr>";
-  
-   
-   
-  echo "</table>";
-  echo "<br>";
-}
-if ($flag = 0){
-  echo "<p>You have not submitted any offers.</p>";
-}
-?>
-
+	//Delete offers if delete request is present
+	if (array_key_exists('Delete' ,$_POST)){
+		$sql_del_apps = "DELETE FROM Applications
+		WHERE joboffers=" . $_POST['JobNum'] . " AND employers = '" . $_POST['Employer'] . "'";
+		$sql_del_offer = "DELETE FROM JobOffers
+		WHERE jobnum=" . $_POST['JobNum'] . " AND employers = '" . $_POST['Employer'] . "'";
+		$stid_del_apps = oci_parse($dbh, $sql_del_apps);
+		$stid_del_offer = oci_parse($dbh, $sql_del_offer);
+		oci_execute($stid_del_apps);
+		oci_execute($stid_del_offer);
+		oci_free_statement($stid_del_apps);		
+		oci_free_statement($stid_del_offer);
+	}
+?>						
+<?php
+	$sql1 = "SELECT COUNT(*) 
+			FROM JobOffers
+			WHERE Employers = '" . $_SESSION["Email"] . "'";
+	$sql2 = "SELECT * from JobOffers 
+			WHERE Employers = '" . $_SESSION["Email"] . "'";
+	
+	$stid1=oci_parse($dbh, $sql1);
+	oci_execute($stid1, OCI_DEFAULT);
+	$count = oci_fetch_array($stid1);
+	if($count[0] < 1) {
+		echo "You have not submitted any offers.";
+	} else {
+		$stid2=oci_parse($dbh, $sql2);
+		oci_execute($stid2, OCI_DEFAULT);
+		while (($row = oci_fetch_array($stid2)) != false){
+			//collect applicants for current job
+			$app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
+			$app_stid = oci_parse($dbh, $app_sql);
+			oci_execute($app_stid);
+			$app_count = oci_fetch_all($app_stid, $res);
+			//MAKE THIS A LINK TO THE APPLICATION VIEW
+			echo "<td>";
+				echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
+			echo "</td>";
+			
+			echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
+			echo "<tr>";
+				echo "<td>";
+					echo "<strong>Title: </strong> ";
+					echo $row["TITLE"];
+				echo "</td>";
+				echo "<td>";
+				  echo "<strong>Location: </strong> ";
+				  echo $row["CITY"].", ".$row["COUNTRY"];
+				echo "</td>";
+				echo "<td>";
+				  echo "<strong>Position: </strong> ";
+				  echo $row["POS_TYPE"];
+				echo "</td>";
+				echo "<td>";
+				  echo "<strong>SALARY: </strong> ";
+				  echo "$".$row["SALARY"];
+				echo "</td>";
+				echo "<td style='text-align:right;'>";
+					echo "<a href= EmployersUpdateOffers.php?jobNum=" . $row["JOBNUM"] . "&Employer=" . $row["EMPLOYERS"] . "> Edit </a>";
+					echo "<form action = 'EmployersViewOffers.php' method='POST'>
+							<input type='hidden' name='JobNum' value='" . $row["JOBNUM"] . "'>
+							<input type='hidden' name='Employer' value='" . $row["EMPLOYERS"] . "'>
+							<input type='submit' name='Delete' value='Delete'>
+							</form>
+							";
+				echo "</td>";
+			echo "</tr>";
+			echo "<tr>";
+				echo "<td colspan = '4'>";
+				  echo "<strong>Description: </strong><br>\n ";
+				  echo $row["DESCRIPTION"];
+				echo "</td>";
+			echo "</tr>";
+			echo "</table>";
+			echo "<br>";
+		}
+	}	
+?>		
 <?php
 oci_close($dbh);
 ?>

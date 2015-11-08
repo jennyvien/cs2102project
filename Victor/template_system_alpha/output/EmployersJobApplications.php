@@ -78,75 +78,52 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 				<div class="entry">
 
 <h1> Applications </h1>
-
-<form method="POST">					
+				
 <?php
-	$jobNum = $_SESSION['jobNum'];
-	
-  	$sql = "SELECT * from Applications WHERE JobOffers = '" .$jobNum. "'" ;
-  	
-  
-	
-	
-function customError($errno, $errstr) {
-
-  echo "<b>Error:</b> [$errno] $errstr<br>";
-  echo "Ending Script";
-  die();
-}
-
-//set error handler
-set_error_handler("customError",E_USER_WARNING);
-
-
-$stid=oci_parse($dbh, $sql);
-
-if (is_null($stid)) {
-
-  trigger_error("<strong>No application founded!</strong>",E_USER_WARNING);
-}
-
-oci_execute($stid, OCI_DEFAULT);
-
-
-
-$flag = 0;
-//echo var_dump(oci_fetch_array($stid));
-while (($row = oci_fetch_array($stid)) != false){
-  //show that at least one was found
-  $flag = 1;
-
-  //output all data
-  echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
-  echo "<tr>";
-  
-    echo "<td>";
-      echo "<strong>Applicant: </strong> ";
-      echo $row["APPLICANTS"];
-    echo "</td>";
+	$jobNum = $_GET['job'];
+  	$sql1 = "SELECT COUNT(*) 
+			FROM Applications 
+			WHERE JobOffers = '" .$jobNum. "'" ;
+			
+	$sql2 = "SELECT * 
+			From Applications 
+			WHERE JobOffers = '" .$jobNum. "'" ;
+			
+  	$stid1 = oci_parse($dbh, $sql1);
+	oci_execute($stid1, OCI_DEFAULT);
+	$count = oci_fetch_array($stid1);
+	if($count[0] < 1) {
+		echo "There are no applications for this job offer.";
+	} else {
+		$stid2=oci_parse($dbh, $sql2);
+		oci_execute($stid2, OCI_DEFAULT);
+		while (($row = oci_fetch_array($stid2)) != false){
+		echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
+			echo "<tr>";
+			
+			echo "<td>";
+				echo "<strong>Applicant: </strong> ";
+				echo $row["APPLICANTS"];
+			echo "</td>";
     
-    echo "<td>";
-      echo "<strong>Apply Date: </strong> ";
-      echo $row["DATE_APPLIED"];
-    echo "</td>";
-    
-    echo "</tr>";
-  echo "<tr>";
-    echo "<td colspan = '4'>";
-      echo "<strong>Write up: </strong><br>\n ";
-      echo $row["WRITEUP"];
-    echo "</td>";
-    
-  echo "</tr>";
-  
-  echo "</table>";
-  echo "<br>";
-}
-
-	
+			echo "<td>";
+				echo "<strong>Apply Date: </strong> ";
+				echo $row["DATE_APPLIED"];
+			echo "</td>";
+			
+			echo "</tr>";
+			
+			echo "<tr>";
+				echo "<td colspan = '4'>";
+				  echo "<strong>Write up: </strong><br>\n ";
+				  echo $row["WRITEUP"];
+				echo "</td>";	
+			echo "</tr>";
+		echo "</table>";
+		echo "<br>";
+		}  
+	}	
 ?>
-</form>
-
 				</div>
 			</div>
 		</div>

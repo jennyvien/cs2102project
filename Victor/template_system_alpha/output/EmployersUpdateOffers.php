@@ -86,10 +86,10 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 
 <form method="POST">
 	<?php
-	
-		$jobNum = $_SESSION['jobNum'];
-		
-		$sql = "SELECT * FROM  JobOffers WHERE jobnum='" .$jobNum. "'" ;
+		$jobNum = $_GET['jobNum'];
+		$employer = $_GET['Employer'];
+
+		$sql = "SELECT * FROM  JobOffers WHERE jobnum=" .$jobNum. " AND employers ='".$employer. "'" ;
 		$stid = oci_parse($dbh, $sql);
 		oci_execute($stid, OCI_DEFAULT);
 		$data = oci_fetch_array($stid);	
@@ -106,7 +106,7 @@ if (!isset($_SESSION["LoggedIn"]) or $_SESSION["LoggedIn"] == 0){
 		. $data["COUNTRY"] . "\" />";
 		echo "<br> Area Code: <input type=\"text\" name=\"Area_code\" id=\"Area_code\" value=\""
 		. $data["AREA_CODE"] . "\" />";
-		echo "<br> Type: <input type=\"text\" name=\"Type\" id=\"Type\" value=\""
+		echo "<br> Position Type: <input type=\"text\" name=\"Type\" id=\"Type\" value=\""
 		. $data["POS_TYPE"] . "\" />";
 		echo "<br> Salary: <input type=\"text\" name=\"Salary\" id=\"Salary\" value=\""
 		. $data["SALARY"] . "\" />";	
@@ -134,8 +134,11 @@ if(isset($_POST['formSubmit']))
 		. $_POST['Type'] .
 		"', Salary = '"
 		. $_POST['Salary'] .
-		"' where jobnum = '"
-		. $_SESSION['jobNum'] ."'";
+		"' where jobnum ='"
+		. $jobNum .
+		"' and employers = '"
+		. $employer . "'";
+		
 		
 	$stid= oci_parse($dbh, $sql);
 	oci_execute($stid, OCI_COMMIT_ON_SUCCESS);

@@ -101,37 +101,44 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 					$sql1 = "SELECT COUNT(*)
 							FROM applications
 							WHERE applicants = '" .$_SESSION["Email"]. "'";
-					
-					$sql2="SELECT a.date_applied, j.title, e.company, a.applicants, a.Employers, a.JobOffers
-						FROM applications a, joboffers j, employers e
-						WHERE a.applicants = '" .$_SESSION["Email"]. "'
-						and a.employers = e.email
-						and a.joboffers = j.jobnum";	
 					$stid1=oci_parse($dbh, $sql1);
 					oci_execute($stid1, OCI_DEFAULT);
 					$count = oci_fetch_array($stid1);
 					if($count[0] < 1) {
 						echo "No active applications to display.";
 					} else {
-						$stid2=oci_parse($dbh, $sql2);
-						oci_execute($stid2, OCI_DEFAULT);
+						$sql_get_applications="SELECT * FROM applications WHERE applicants = '" .$_SESSION["Email"]. "'";
+						$stid_get_applications=oci_parse($dbh, $sql_get_applications);
+						oci_execute($stid_get_applications, OCI_DEFAULT);
 						echo $table;
-						while($row = oci_fetch_array($stid2, OCI_RETURN_NULLS)) {
+						while($row = oci_fetch_array($stid_get_applications, OCI_RETURN_NULLS)) {
+							$sql_job_title = "SELECT title FROM joboffers 
+											WHERE jobnum = '" .$row['JOBOFFERS']. "'
+											AND employers ='" .$row['EMPLOYERS']. "'";
+							$sql_company = "SELECT company FROM Employers WHERE email = '" .$row['EMPLOYERS']. "'";
+							$stid_job_title = oci_parse($dbh, $sql_job_title);
+							$stid_company = oci_parse($dbh, $sql_company);
+							oci_execute($stid_job_title, OCI_DEFAULT);
+							oci_execute($stid_company, OCI_DEFAULT);
+							$job_title = oci_fetch_array($stid_job_title);
+							$company = oci_fetch_array($stid_company);
 							echo "<tr>";
-							echo "<td>" .$row[0]. "</td>";
-							echo "<td>" .$row[1]. "</td>";
-							echo "<td>" .$row[2]. "</td>";
+							echo "<td>" .$row['DATE_APPLIED']. "</td>";
+							echo "<td>" .$job_title[0]. "</td>";
+							echo "<td>" .$company[0]. "</td>";
 							echo "<td>" . "
 							<form action='ApplicantsBrowseApplications.php' method='POST'>
-							<input type='hidden' name='Applicants' value='" . $row[3] . "'>
-							<input type='hidden' name='Employers' value='" . $row[4] . "'>
-							<input type='hidden' name='Joboffers' value='" . $row[5] . "'>
+							<input type='hidden' name='Applicants' value='" . $row['APPLICANTS'] . "'>
+							<input type='hidden' name='Employers' value='" . $row['EMPLOYERS'] . "'>
+							<input type='hidden' name='Joboffers' value='" . $row['JOBOFFERS'] . "'>
 							<input type='submit' name='Delete' value='Delete'>
 							</form>
 							";
 							echo "</tr>";
 						}
-						oci_free_statement($stid2);
+						oci_free_statement($stid_job_title);
+						oci_free_statement($stid_company);
+						oci_free_statement($stid_get_applications);
 					}
 					oci_free_statement($stid1);
 					oci_close($dbh);
