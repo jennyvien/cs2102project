@@ -108,13 +108,13 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 		oci_execute($stid2, OCI_DEFAULT);
 		while (($row = oci_fetch_array($stid2)) != false){
 			//collect applicants for current job
-			$app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"];
+			$app_sql = "SELECT * from Applications WHERE JobOffers = ".$row["JOBNUM"] . "AND Employers = '" . $row["EMPLOYERS"] . "'";
 			$app_stid = oci_parse($dbh, $app_sql);
 			oci_execute($app_stid);
 			$app_count = oci_fetch_all($app_stid, $res);
-			//MAKE THIS A LINK TO THE APPLICATION VIEW
+			//MAKE THIS A LINK TO THE APPLICATION VIEW	
 			echo "<td>";
-				echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."'><strong>Applicants: </strong> ".$app_count."</a>";
+				echo "<a href ='EmployersJobApplications.php?job=".$row["JOBNUM"]."&employer=".$row["EMPLOYERS"]."'><strong>Applicants: </strong> ".$app_count."</a>";
 			echo "</td>";
 			
 			echo "<table style='padding: 10px; border: solid black 1px; border-collapse: separate; border-spacing: 10px; width:100%'>";
