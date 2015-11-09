@@ -99,7 +99,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 <!--TESTING-->
 
 <?php
-	echo '<pre>';
+/*	echo '<pre>';
 	var_dump($_SESSION);
 	echo '</pre>';
 	echo "POST: <br>";
@@ -139,7 +139,7 @@ $sql = "SELECT * FROM  Applicants
 	oci_execute($stid);
 	$data = oci_fetch_array($stid);
 	var_dump($data);
-	echo count($data);
+	echo count($data);*/
 ?>
 
 <?php

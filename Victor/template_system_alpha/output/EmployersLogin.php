@@ -96,7 +96,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
 	<input type="submit" value = "Submit", name="Submit">
 	</form>
 <?php
-	echo '<pre>';
+/*	echo '<pre>';
 	var_dump($_SESSION);
 	echo '</pre>';
 	echo "POST: <br>";
@@ -124,7 +124,7 @@ $dbh = ocilogon($ora_acc, 'crse1510', '(DESCRIPTION =
             echo "</TD></TR>\n"; 
     } 
     echo "</TABLE>"; 
-}
+}*/
 ?>
 
 <?php
